@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TRICOLORE AIRLINE | TROPICAL SAFETY COMMAND</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap');
+        :root { --miku: #39c5bb; --luka: #ffb6c1; --sunset: #ff9e7d; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #e0f7f6; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- VISUAL OVERHAUL --- */
+        #bg-video { position: fixed; inset: 0; min-width: 100%; min-height: 100%; z-index: -20; object-fit: cover; }
+        .overlay { position: fixed; inset: 0; background: linear-gradient(135deg, rgba(57,197,187,0.3) 0%, rgba(255,158,125,0.3) 100%); backdrop-filter: saturate(1.8) blur(8px); z-index: -10; }
+
+        .tropical-glass { 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(60px) saturate(220%); 
+            border: 3px solid rgba(255, 255, 255, 1); 
+            box-shadow: 0 50px 120px rgba(0,0,0,0.15);
+            border-radius: 90px;
+        }
+
+        /* --- CREW IMAGE FIX --- */
+        .crew-container { width: 100%; height: 300px; border-radius: 50px; overflow: hidden; background: white; margin-bottom: 20px; border: 4px solid white; }
+        .crew-img { width: 100%; height: 100%; object-fit: contain; object-position: top; }
+
+        /* --- NAVIGATION --- */
+        .nav-link { font-weight: 800; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; color: #1e293b; transition: 0.5s; }
+        .nav-link:hover { color: var(--miku); letter-spacing: 6px; transform: scale(1.1); }
+        .main-logo { width: 280px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .main-logo:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* --- ANIMATIONS --- */
+        .page-view { display: none; opacity: 0; }
+        .page-view.active { display: block; animation: floatUp 0.9s forwards; }
+        @keyframes floatUp { from { transform: translateY(120px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* --- SEATS --- */
+        .seat { width: 45px; height: 45px; border-radius: 14px; border: 3px solid var(--miku); background: white; cursor: pointer; transition: 0.3s; }
+        .seat.occupied { background: #94a3b8; border: none; cursor: not-allowed; opacity: 0.5; }
+        .seat.selected { background: var(--miku); box-shadow: 0 0 30px var(--miku); transform: scale(1.2); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <audio id="bgm-main" loop src="bg1.mp3"></audio>
+    <audio id="bgm-book" loop src="book.mp3"></audio>
+    <audio id="bgm-viva" loop src="viva.mp3"></audio>
+    <audio id="bgm-guest" loop src="guest.mp3"></audio>
+    <audio id="bgm-safe" loop src="safe.mp3"></audio>
+
+    <div id="start-gate" class="fixed inset-0 bg-white z-[10000] flex flex-col justify-center items-center">
+        <img src="logo.png" class="w-96 mb-16 animate-pulse">
+        <button onclick="initSystem()" class="bg-[#39c5bb] text-white px-24 py-10 rounded-full font-black text-4xl shadow-3xl hover:bg-slate-900 transition uppercase tracking-widest">Connect to Terminal</button>
+    </div>
+
+    <video id="bg-video" loop muted playsinline src="01.mp4"></video>
+    <div class="overlay"></div>
+
+    <nav class="fixed top-10 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-7xl">
+        <div class="tropical-glass p-8 flex justify-between items-center px-16 border-white shadow-2xl">
+            <div class="flex items-center gap-10 cursor-pointer" onclick="switchPage('main')">
+                <img src="logo.png" class="main-logo">
+            </div>
+            <div class="hidden lg:flex gap-12">
+                <span class="nav-link" onclick="switchPage('book')">Bookings</span>
+                <span class="nav-link" onclick="switchPage('viva')">Vivace Hub</span>
+                <span class="nav-link" onclick="switchPage('guests')">Special Guests</span>
+                <span class="nav-link" onclick="switchPage('safety')">Safety Info</span>
+            </div>
+            <button onclick="switchPage('main')" class="bg-slate-900 text-white px-10 py-4 rounded-full font-black text-xs tracking-[0.4em] uppercase hover:bg-[#39c5bb] transition">Home</button>
+        </div>
+    </nav>
+
+    <main id="page-main" class="page-view active pt-72 pb-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-40">
+            <h2 class="text-[12rem] font-black text-white leading-none drop-shadow-2xl uppercase italic tracking-tighter">Vivace</h2>
+            <p class="text-3xl font-black text-slate-800 tracking-[1.2em] uppercase mt-4">Tricolore Sky Resorts</p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 gap-12 mb-40">
+            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
+                <div class="crew-container"><img src="miku.png" class="crew-img"></div>
+                <h3 class="text-3xl font-black mb-1">Miku</h3>
+                <p class="text-xs font-black text-[#39c5bb] uppercase tracking-widest">Command Captain</p>
+            </div>
+            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
+                <div class="crew-container"><img src="luka.png" class="crew-img"></div>
+                <h3 class="text-3xl font-black mb-1">Luka</h3>
+                <p class="text-xs font-black text-[#ffb6c1] uppercase tracking-widest">Executive Service</p>
+            </div>
+            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
+                <div class="crew-container"><img src="rin.png" class="crew-img"></div>
+                <h3 class="text-3xl font-black mb-1">Rin</h3>
+                <p class="text-xs font-black text-[#f8e71c] uppercase tracking-widest">Flight Tactics</p>
+            </div>
+            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
+                <div class="crew-container"><img src="meiko.png" class="crew-img"></div>
+                <h3 class="text-3xl font-black mb-1">Meiko</h3>
+                <p class="text-xs font-black text-[#ff4d4d] uppercase tracking-widest">Global Logistics</p>
+            </div>
+        </div>
+
+        <div class="tropical-glass p-24 mb-40 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-10">
+                <h3 class="text-6xl font-black uppercase leading-tight text-slate-900">Premium Sky Perks</h3>
+                <ul class="space-y-6">
+                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#39c5bb] font-bold uppercase text-sm">Holographic Seat Assistants</li>
+                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#ffb6c1] font-bold uppercase text-sm">Real-Time Concert Streaming at 40k Feet</li>
+                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#f8e71c] font-bold uppercase text-sm">Leek-Infused Refreshment Menu</li>
+                </ul>
+            </div>
+            <div class="bg-slate-900 p-16 rounded-[80px] text-white">
+                <h4 class="text-2xl font-black mb-6 uppercase">System Status</h4>
+                <div class="space-y-4">
+                    <div class="flex justify-between"><span>Vivace Engines</span><span class="text-[#39c5bb]">Optimal</span></div>
+                    <div class="flex justify-between"><span>Cabin Melody</span><span class="text-[#39c5bb]">440Hz</span></div>
+                    <div class="flex justify-between"><span>Tropical Saturation</span><span class="text-[#39c5bb]">100 percent</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tropical-glass p-20">
+            <h3 class="text-5xl font-black mb-16 uppercase">Flight Log Archives</h3>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div id="log-list" class="h-[600px] overflow-y-auto space-y-6 pr-6"></div>
+                <div class="space-y-6">
+                    <div class="bg-white/40 p-12 rounded-[60px] border-4 border-white">
+                        <h4 class="text-2xl font-black mb-8 uppercase">Submit Passenger Log</h4>
+                        <input id="u-name" type="text" placeholder="Pilot Name" class="w-full p-6 rounded-3xl mb-6 bg-white outline-none font-bold uppercase tracking-widest shadow-inner border-none">
+                        <textarea id="u-body" placeholder="Log Description" class="w-full p-6 h-48 rounded-3xl mb-8 bg-white outline-none font-bold shadow-inner border-none"></textarea>
+                        <button onclick="addLog()" class="w-full bg-[#39c5bb] text-white py-8 rounded-full font-black text-xl uppercase tracking-widest shadow-xl">Transmit Log</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="page-book" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
+        <div class="tropical-glass p-24 text-center">
+            <h2 class="text-8xl font-black mb-20 uppercase tracking-tighter">Reservation Control</h2>
+            <div class="grid lg:grid-cols-3 gap-16 text-left mb-24">
+                <div class="space-y-4">
+                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Departure Vector</label>
+                    <select id="origin" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black uppercase shadow-xl border-none">
+                        <option>Tokyo Narita Sky-Port</option>
+                        <option>Cape Town International</option>
+                        <option>Honolulu Island Terminal</option>
+                    </select>
+                </div>
+                <div class="space-y-4">
+                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Unit Quantity</label>
+                    <input id="qty" type="number" value="1" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black shadow-xl border-none">
+                </div>
+                <div class="space-y-4">
+                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Luxury Level</label>
+                    <select id="class" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black uppercase shadow-xl border-none">
+                        <option>Diamond Vivace</option>
+                        <option>Emerald Lagoon</option>
+                        <option>Sunset Economy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-white/20 p-20 rounded-[100px] border-4 border-white inline-block mb-20">
+                <h4 class="text-xl font-black uppercase mb-12 tracking-widest">Select Air Coordinates</h4>
+                <div id="seat-map" class="grid grid-cols-4 md:grid-cols-10 gap-6"></div>
+            </div>
+
+            <button onclick="generateTicket()" class="w-full py-10 rounded-full bg-slate-900 text-white font-black text-4xl uppercase tracking-[0.2em] shadow-3xl hover:bg-[#39c5bb] transition">Confirm Flight Data</button>
+            <div id="ticket-final" class="mt-16 hidden p-20 bg-white rounded-[80px] border-8 border-double border-[#39c5bb] text-left">
+                <h3 class="text-5xl font-black mb-6 uppercase">Tricolore Boarding Pass</h3>
+                <div id="ticket-text" class="text-2xl font-black uppercase leading-relaxed text-slate-500 italic"></div>
+            </div>
+        </div>
+    </main>
+
+    <main id="page-viva" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-3 gap-16">
+            <div class="lg:col-span-2 space-y-16">
+                <div class="tropical-glass p-20">
+                    <h2 class="text-6xl font-black mb-16 uppercase text-[#39c5bb]">Global Vocaloid Network News</h2>
+                    <div class="space-y-20">
+                        <div class="border-b-4 border-white pb-10">
+                            <h3 class="text-3xl font-black uppercase tracking-tight">Magical Mirai 2026: Solar System Tour</h3>
+                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">Crypton Future Media has confirmed that the 2026 concert series will utilize 8K transparent OLED panels for a three-dimensional stage presence. Tokyo and Osaka dates are sold out.</p>
+                        </div>
+                        <div class="border-b-4 border-white pb-10">
+                            <h3 class="text-3xl font-black uppercase tracking-tight">V6 Harmony AI Implementation</h3>
+                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">The new Harmony Engine allows Luka and Miku to detect the mood of the audience and adjust their vocal tone in real-time. Tricolore Airlines is the first to integrate this into seatback entertainment.</p>
+                        </div>
+                        <div class="border-b-4 border-white pb-10">
+                            <h3 class="text-3xl font-black uppercase tracking-tight">Project Sekai Global 2026 Expansion</h3>
+                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">A new tropical resort world is being added to the game, featuring exclusive Tricolore Airline uniforms for all characters.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-16">
+                <div class="tropical-glass p-12 text-center">
+                    <h3 class="text-3xl font-black mb-10 uppercase tracking-widest">Puyo Command</h3>
+                    <div id="puyo-grid" class="grid grid-cols-3 gap-6 p-8 bg-slate-900/10 rounded-[60px] mx-auto w-fit"></div>
+                    <p class="mt-8 text-xs font-black uppercase text-[#39c5bb]">Initialize color matches</p>
+                    <button onclick="genPuyo()" class="mt-10 bg-slate-900 text-white px-12 py-4 rounded-full font-black uppercase text-xs">Reset Matrix</button>
+                </div>
+                <div class="tropical-glass p-12">
+                    <h3 class="text-2xl font-black mb-6 uppercase">Live Flight Stats</h3>
+                    <div class="space-y-4 font-black uppercase text-xs">
+                        <div class="flex justify-between"><span>Altitude</span><span>39,000 ft</span></div>
+                        <div class="flex justify-between"><span>Airspeed</span><span>Mach 0.39</span></div>
+                        <div class="flex justify-between"><span>Destination</span><span>The Sun</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="page-guests" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
+        <div class="tropical-glass p-24 border-r-[60px] border-[#ffb6c1] shadow-3xl">
+            <div class="flex flex-col lg:flex-row gap-20 items-center">
+                <div class="w-80 h-80 rounded-full border-8 border-white shadow-3xl overflow-hidden shrink-0 bg-white">
+                    <img src="mpfp.png" class="w-100 h-100 object-cover">
+                </div>
+                <div class="flex-1 space-y-10">
+                    <h3 class="text-8xl font-black text-[#ffb6c1] uppercase tracking-tighter italic">Mikudayo</h3>
+                    <div class="text-3xl text-slate-700 leading-relaxed font-black lowercase italic space-y-10">
+                        <p>omg literally where do i even start!! tricolore is the ONLY way to travel like i am actually obsessed with the vibe in here!! every time i walk into the diamond lounge i feel like i am floating in a giant bubble of teal happiness and the cabin pressure is literally perfect for my voice and my hearing which is so rare on flights lol!!</p>
+                        <p>miku is the best captain ever because she actually lets me practice my piano in the diamond suite whenever i want and she even brings me fresh coconuts with teal straws while i am working on my scales!! it is so aesthetic and peaceful up here and the view of the sunset through the massive glass wings actually made me cry a little because it was so pretty!! i am writing a whole new album just about the clouds we saw over the ocean yesterday and i named a song after the vivace hub because it is my favorite place in the world now!! i never want to land i just want to stay up here in the sky forever with miku and luka and the rest of the crew!! see you next time miku ilysm!!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-24 bg-white/40 p-16 rounded-[100px] border-4 border-[#ffb6c1]">
+                <h4 class="font-black text-[#ffb6c1] uppercase text-sm mb-6 tracking-[0.8em]">Official Executive Response</h4>
+                <p class="text-2xl font-black text-slate-800 italic leading-relaxed">Dear Mikudayo, the melody of your piano echoing through the fuselage is the highest honor our airline could receive. We have permanently reserved seat 01A in the Diamond Suite for your exclusive use. The galley has been instructed to keep a fresh supply of coconuts on ice for all your future flights. Your music makes the sky a better place.</p>
+            </div>
+        </div>
+    </main>
+
+    <main id="page-safety" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
+        <div class="tropical-glass p-24 text-center">
+            <h2 class="text-7xl font-black mb-20 uppercase text-[#39c5bb]">Tactical Safety Protocols</h2>
+            <div class="grid lg:grid-cols-2 gap-20 text-left">
+                <div class="space-y-12">
+                    <div class="bg-slate-900 text-white p-12 rounded-[60px]">
+                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Melodic Depressurization</h4>
+                        <p class="text-xl italic font-medium leading-relaxed">In the rare event of cabin pressure loss, teal leek-shaped oxygen masks will descend from the ceiling. Place the mask over your face and continue humming at a steady 440Hz frequency to maintain lung stability.</p>
+                    </div>
+                    <div class="bg-[#39c5bb] text-white p-12 rounded-[60px]">
+                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Ocean Descent</h4>
+                        <p class="text-xl italic font-medium leading-relaxed">If the aircraft lands on water, your seat cushion can be used as a flotation device. Each cushion is equipped with a waterproof speaker playing an 8-bit version of Ievan Polkka to signal for rescue.</p>
+                    </div>
+                </div>
+                <div class="space-y-12">
+                    <div class="bg-[#ffb6c1] text-white p-12 rounded-[60px]">
+                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Electronic Interference</h4>
+                        <p class="text-xl italic font-medium leading-relaxed">All electronic devices must be set to Flight Mode. However, Vocaloid-enabled synthesizers are exempt from this rule and may be operated at all times during the flight.</p>
+                    </div>
+                    <div class="bg-white p-12 rounded-[60px] shadow-2xl">
+                        <h3 class="text-4xl font-black uppercase text-slate-800 mb-6">Emergency Exits</h3>
+                        <p class="text-xl font-black text-slate-400">Located at the front, middle, and rear. Follow the glowing teal floor lights to the nearest exit path.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const audio = { 
+            main: document.getElementById('bgm-main'), 
+            book: document.getElementById('bgm-book'), 
+            viva: document.getElementById('bgm-viva'),
+            guests: document.getElementById('bgm-guest'),
+            safety: document.getElementById('bgm-safe')
+        };
+
+        function initSystem() {
+            document.getElementById('start-gate').style.display = 'none';
+            document.getElementById('bg-video').play();
+            switchAudio('main');
+            renderLogs();
+            renderSeats();
+            genPuyo();
+        }
+
+        function switchPage(id) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + id).classList.add('active');
+            window.scrollTo({top:0, behavior:'smooth'});
+            switchAudio(id);
+        }
+
+        function switchAudio(id) {
+            Object.values(audio).forEach(a => { a.pause(); a.currentTime = 0; });
+            if (audio[id]) audio[id].play(); else audio.main.play();
+        }
+
+        function renderSeats() {
+            const map = document.getElementById('seat-map');
+            for(let i=1; i<=40; i++) {
+                const isOcc = (i === 1 || i === 11 || i === 39) ? 'occupied' : '';
+                map.innerHTML += `<div class="seat ${isOcc}" onclick="this.classList.toggle('selected')"></div>`;
+            }
+        }
+
+        function generateTicket() {
+            const origin = document.getElementById('origin').value;
+            const q = document.getElementById('qty').value;
+            const t = document.getElementById('class').value;
+            const box = document.getElementById('ticket-final');
+            const text = document.getElementById('ticket-text');
+            box.classList.remove('hidden');
+            text.innerHTML = `manifest confirmed for ${q} passenger units departing from ${origin} in the ${t} sector. status: vivace core active. please proceed to terminal 39 immediately.`;
+        }
+
+        function genPuyo() {
+            const grid = document.getElementById('puyo-grid');
+            const colors = ['#ff4d4d', '#39c5bb', '#f8e71c', '#4ade80'];
+            grid.innerHTML = '';
+            for(let i=0; i<9; i++) {
+                const c = colors[Math.floor(Math.random()*4)];
+                grid.innerHTML += `<div style="background:${c}; width:50px; height:50px; border-radius:50%; border:4px solid white; cursor:pointer;" onclick="this.style.background='white'"></div>`;
+            }
+        }
+
+        function addLog() {
+            const n = document.getElementById('u-name').value || "Unknown Pilot";
+            const b = document.getElementById('u-body').value || "Flight status normal.";
+            const list = document.getElementById('log-list');
+            const item = `<div class="bg-white border-4 border-[#39c5bb] p-8 rounded-[40px]">
+                <h5 class="text-xs font-black uppercase text-[#39c5bb] mb-2">${n}</h5>
+                <p class="text-lg font-black italic lowercase">"${b}"</p>
+            </div>`;
+            list.insertAdjacentHTML('afterbegin', item);
+            document.getElementById('u-name').value = '';
+            document.getElementById('u-body').value = '';
+        }
+
+        function renderLogs() {
+            const list = document.getElementById('log-list');
+            const n = ["Sunny", "Hero", "Kel", "Basil"];
+            for(let i=0; i<15; i++) {
+                list.innerHTML += `<div class="bg-white/30 p-8 rounded-[40px] border border-white">
+                    <h5 class="text-xs font-black uppercase text-slate-400 mb-2">${n[i%4]}_Pilot</h5>
+                    <p class="text-lg font-bold italic lowercase">the sky looks so clear from 39000 feet today.</p>
+                </div>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -2,353 +2,1275 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TRICOLORE AIRLINE | TROPICAL SAFETY COMMAND CENTER - MAXIMALIST EDITION">
+    <meta name="author" content="Tropical Cyberpunk Design Group">
+    <meta name="generator" content="Gemini Expert Engine">
+    <meta name="theme-color" content="#39c5bb">
     <title>TRICOLORE AIRLINE | TROPICAL SAFETY COMMAND</title>
-	<link rel="icon" type="image/png" href="logo1.png">
+    <link rel="icon" type="image/png" href="logo1.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap');
-        :root { --miku: #39c5bb; --luka: #ffb6c1; --sunset: #ff9e7d; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #e0f7f6; overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* --- VISUAL OVERHAUL --- */
-        #bg-video { position: fixed; inset: 0; min-width: 100%; min-height: 100%; z-index: -20; object-fit: cover; }
-        .overlay { position: fixed; inset: 0; background: linear-gradient(135deg, rgba(57,197,187,0.3) 0%, rgba(255,158,125,0.3) 100%); backdrop-filter: saturate(1.8) blur(8px); z-index: -10; }
-
-        .tropical-glass { 
-            background: rgba(255, 255, 255, 0.6); 
-            backdrop-filter: blur(60px) saturate(220%); 
-            border: 3px solid rgba(255, 255, 255, 1); 
-            box-shadow: 0 50px 120px rgba(0,0,0,0.15);
-            border-radius: 90px;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root { 
+            --miku: #39c5bb; 
+            --luka: #ffb6c1; 
+            --sunset: #ff9e7d; 
+            --slate-dark: #1E293B;
+            --slate-deep: #0F172A;
+            --neon-green: #10B981;
+            --neon-red: #EF4444;
+            --neon-purple: #A855F7;
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-blur: blur(32px);
+            --glass-saturate: saturate(230%);
+            --glass-border: 5px solid rgba(255, 255, 255, 1);
+        }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #e0f7f6; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+            color: var(--slate-dark);
+            margin: 0;
+            padding: 0;
+            font-size: 1.15rem;
         }
 
-        /* --- CREW IMAGE FIX --- */
-        .crew-container { width: 100%; height: 300px; border-radius: 50px; overflow: hidden; background: white; margin-bottom: 20px; border: 4px solid white; }
-        .crew-img { width: 100%; height: 100%; object-fit: contain; object-position: top; }
+        .mono { font-family: 'Space Mono', monospace; }
 
-        /* --- NAVIGATION --- */
-        .nav-link { font-weight: 800; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; color: #1e293b; transition: 0.5s; }
-        .nav-link:hover { color: var(--miku); letter-spacing: 6px; transform: scale(1.1); }
-        .main-logo { width: 280px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .main-logo:hover { transform: scale(1.1) rotate(5deg); }
+        #bg-video { 
+            position: fixed; inset: 0; min-width: 100%; min-height: 100%; 
+            z-index: -20; object-fit: cover; pointer-events: none;
+        }
+        .overlay { 
+            position: fixed; inset: 0; 
+            background: linear-gradient(135deg, rgba(57,197,187,0.5) 0%, rgba(255,158,125,0.5) 100%); 
+            backdrop-filter: blur(14px) saturate(220%); 
+            -webkit-backdrop-filter: blur(14px) saturate(220%);
+            z-index: -10; pointer-events: none;
+        }
 
-        /* --- ANIMATIONS --- */
+        .tropical-glass { 
+            background: var(--glass-bg); 
+            backdrop-filter: var(--glass-blur) var(--glass-saturate); 
+            -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
+            border: var(--glass-border); 
+            box-shadow: 0 60px 150px rgba(0,0,0,0.15);
+            border-radius: 60px;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+        }
+        .tropical-glass:hover {
+            box-shadow: 0 70px 180px rgba(57,197,187,0.25);
+        }
+        .tropical-glass-sm { border-radius: 35px; }
+        .tropical-glass-flat { border-radius: 24px; }
+
+        .nav-link { 
+            font-weight: 900; font-size: 13px; letter-spacing: 2px; 
+            text-transform: uppercase; cursor: pointer; color: var(--slate-dark); 
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 10px 16px;
+            border-radius: 24px;
+        }
+        .nav-link:hover, .nav-link.active-nav { 
+            color: white; background: var(--slate-dark); letter-spacing: 3px; transform: translateY(-2px); 
+        }
+        .main-logo { width: 230px; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+        .main-logo:hover { transform: scale(1.06) rotate(3deg); filter: drop-shadow(0 15px 30px rgba(57,197,187,0.7)); }
+
+        #start-gate { transition: transform 1.4s cubic-bezier(0.86, 0, 0.07, 1); }
+        .gate-slide-up { transform: translateY(-100%); }
+        .breathe-glow { animation: breathe 3.5s infinite ease-in-out; }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 35px var(--miku)) drop-shadow(0 0 60px var(--luka)); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 0 60px var(--luka)) drop-shadow(0 0 90px var(--sunset)); }
+        }
+
         .page-view { display: none; opacity: 0; }
-        .page-view.active { display: block; animation: floatUp 0.9s forwards; }
+        .page-view.active { display: block; animation: floatUp 0.9s forwards cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes floatUp { from { transform: translateY(120px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* --- SEATS --- */
-        .seat { width: 45px; height: 45px; border-radius: 14px; border: 3px solid var(--miku); background: white; cursor: pointer; transition: 0.3s; }
-        .seat.occupied { background: #94a3b8; border: none; cursor: not-allowed; opacity: 0.5; }
-        .seat.selected { background: var(--miku); box-shadow: 0 0 30px var(--miku); transform: scale(1.2); }
+        .seat { 
+            aspect-ratio: 1; border-radius: 18px; border: 4px solid white; 
+            background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.25s ease; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 900; color: var(--slate-dark);
+        }
+        .seat:hover { background: rgba(255,255,255,0.85); transform: scale(1.08); }
+        .seat.active { 
+            background: var(--miku); border-color: var(--miku); 
+            box-shadow: 0 0 30px var(--miku); color: white; transform: scale(1.15); 
+        }
+        .seat.occupied {
+            background: var(--slate-dark); border-color: var(--slate-dark); color: rgba(255,255,255,0.4); cursor: not-allowed;
+        }
+
+        .piano-key {
+            height: 320px; background: rgba(255,255,255,0.9); border: 5px solid var(--slate-dark);
+            border-radius: 0 0 32px 32px; transition: all 0.15s cubic-bezier(0.075, 0.82, 0.165, 1); cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .piano-key:active { background: var(--luka); transform: translateY(18px); box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
+        .piano-key-black {
+            height: 190px; background: var(--slate-dark); border: 3px solid white;
+            z-index: 10; margin-left: -24px; margin-right: -24px; border-radius: 0 0 16px 16px;
+        }
+        .piano-key-black:active { background: var(--sunset); }
+
+        .error-flash { animation: flashRed 0.6s ease; }
+        @keyframes flashRed { 0%, 100% { background: var(--glass-bg); } 50% { background: rgba(239,68,68,0.5); } }
+        
+        .success-flash { animation: flashGreen 0.6s ease; }
+        @keyframes flashGreen { 0%, 100% { background: var(--glass-bg); } 50% { background: rgba(16,185,129,0.5); } }
+
+        ::-webkit-scrollbar { width: 14px; height: 14px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); }
+        ::-webkit-scrollbar-thumb { background: var(--slate-dark); border-radius: 10px; border: 3px solid white; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--miku); }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-slate-900">
 
     <audio id="bgm-main" loop src="bg1.mp3"></audio>
     <audio id="bgm-book" loop src="book.mp3"></audio>
     <audio id="bgm-viva" loop src="viva.mp3"></audio>
     <audio id="bgm-guest" loop src="guest.mp3"></audio>
+    <audio id="bgm-jiafei" loop src="jiafei.mp3"></audio>
     <audio id="bgm-safe" loop src="safe.mp3"></audio>
+    <audio id="bgm-secret" loop src="secret.mp3"></audio>
+    <audio id="bgm-lounge" loop src="lounge.mp3"></audio>
+    <audio id="bgm-radar" loop src="weather.mp3"></audio>
+    <audio id="bgm-freight" loop src="cargo.mp3"></audio>
+    <audio id="bgm-theater" loop src="hologram.mp3"></audio>
+    <audio id="bgm-hydro" loop src="botanical.mp3"></audio>
+    <audio id="bgm-vault" loop src="blackbox.mp3"></audio>
+    <audio id="bgm-engine" loop src="engine.mp3"></audio>
+    <audio id="bgm-shrine" loop src="miku_shrine.mp3"></audio>
+    <audio id="bgm-casino" loop src="casino.mp3"></audio>
+    <audio id="bgm-spa" loop src="spa.mp3"></audio>
+    
+    <audio id="sfx-jump" src="jump.mp3"></audio>
+    <audio id="sfx-confirm" src="confirm.mp3"></audio>
+    <audio id="sfx-error" src="error.mp3"></audio>
+    <audio id="sfx-cash" src="cash.mp3"></audio>
+    <audio id="sfx-note1" src="piano_c.mp3"></audio>
+    <audio id="sfx-note2" src="piano_d.mp3"></audio>
+    <audio id="sfx-note3" src="piano_e.mp3"></audio>
+    <audio id="sfx-note4" src="piano_f.mp3"></audio>
 
-    <div id="start-gate" class="fixed inset-0 bg-white z-[10000] flex flex-col justify-center items-center">
-        <img src="logo.png" class="w-96 mb-16 animate-pulse">
-        <button onclick="initSystem()" class="bg-[#39c5bb] text-white px-24 py-10 rounded-full font-black text-4xl shadow-3xl hover:bg-slate-900 transition uppercase tracking-widest">Connect to Terminal</button>
+    <div id="start-gate" class="fixed inset-0 bg-[#e0f7f6] z-[10000] flex flex-col justify-center items-center">
+        <div class="text-center p-12">
+            <img src="logo.png" class="w-[600px] mb-16 breathe-glow cursor-pointer mx-auto" onclick="initializeSystem()" alt="Tricolore Master Emblem">
+            <h1 class="text-5xl font-black tracking-[0.6em] text-slate-800 uppercase mb-6">TRICOLORE AIRLINE</h1>
+            <p class="font-bold tracking-[0.4em] text-[#39c5bb] uppercase text-sm animate-pulse">SYSTEM ACCESS GATEWAY // CLICK EMBLEM LAYER TO INITIALIZE AUDIO STRATUM</p>
+        </div>
     </div>
 
     <video id="bg-video" loop muted playsinline src="01.mp4"></video>
     <div class="overlay"></div>
 
-    <nav class="fixed top-10 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-7xl">
-        <div class="tropical-glass p-8 flex justify-between items-center px-16 border-white shadow-2xl">
-            <div class="flex items-center gap-10 cursor-pointer" onclick="switchPage('main')">
-                <img src="logo.png" class="main-logo">
+    <nav class="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-[1850px]">
+        <div class="tropical-glass px-12 py-6 flex flex-wrap justify-between items-center shadow-4xl">
+            <img src="logo.png" class="main-logo" onclick="switchRoute('main')" alt="Logo Navigation Node">
+            
+            <div class="flex flex-wrap gap-3 items-center justify-center max-w-[80%]">
+                <span id="nav-btn-main" class="nav-link" onclick="switchRoute('main')">System Hub</span>
+                <span id="nav-btn-book" class="nav-link" onclick="switchRoute('book')">Link Manifest</span>
+                <span id="nav-btn-viva" class="nav-link" onclick="switchRoute('viva')">Fleet Hub</span>
+                <span id="nav-btn-guest" class="nav-link" onclick="switchRoute('guest')">Archives</span>
+                <span id="nav-btn-jiafei" class="nav-link" onclick="switchRoute('jiafei')">Jiafei Shop</span>
+                <span id="nav-btn-safe" class="nav-link" onclick="switchRoute('safe')">Safety Matrix</span>
+                <span id="nav-btn-lounge" class="nav-link" onclick="switchRoute('lounge')">VIP Lounge</span>
+                <span id="nav-btn-radar" class="nav-link" onclick="switchRoute('radar')">Weather Node</span>
+                <span id="nav-btn-freight" class="nav-link" onclick="switchRoute('freight')">Cargo Bay</span>
+                <span id="nav-btn-theater" class="nav-link" onclick="switchRoute('theater')">Holo-Deck</span>
+                <span id="nav-btn-hydro" class="nav-link" onclick="switchRoute('hydro')">Hydro Deck</span>
+                <span id="nav-btn-vault" class="nav-link" onclick="switchRoute('vault')">Blackbox Vault</span>
+                <span id="nav-btn-engine" class="nav-link" onclick="switchRoute('engine')">Propulsion Grid</span>
+                <span id="nav-btn-shrine" class="nav-link" onclick="switchRoute('shrine')">Miku Devotional</span>
+                <span id="nav-btn-casino" class="nav-link" onclick="switchRoute('casino')">Leek Lounge</span>
+                <span id="nav-btn-spa" class="nav-link" onclick="switchRoute('spa')">Thermal Pods</span>
             </div>
-            <div class="hidden lg:flex gap-12">
-                <span class="nav-link" onclick="switchPage('book')">Bookings</span>
-                <span class="nav-link" onclick="switchPage('viva')">Vivace Hub</span>
-                <span class="nav-link" onclick="switchPage('guests')">Special Guests</span>
-                <span class="nav-link" onclick="switchPage('safety')">Safety Info</span>
-            </div>
-            <button onclick="switchPage('main')" class="bg-slate-900 text-white px-10 py-4 rounded-full font-black text-xs tracking-[0.4em] uppercase hover:bg-[#39c5bb] transition">Home</button>
+
+            <button onclick="abortToHub()" class="bg-slate-900 text-white px-8 py-4 rounded-full font-black text-sm tracking-[0.2em] uppercase hover:bg-red-500 hover:scale-105 transition-all">ABORT ALL</button>
         </div>
     </nav>
 
-    <main id="page-main" class="page-view active pt-72 pb-20 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-40">
-            <h2 class="text-[12rem] font-black text-white leading-none drop-shadow-2xl uppercase italic tracking-tighter">Vivace</h2>
-            <p class="text-3xl font-black text-slate-800 tracking-[1.2em] uppercase mt-4">Tricolore Sky Resorts</p>
-        </div>
+    <main id="view-main" class="page-view pt-56 pb-24 max-w-[1800px] mx-auto px-8">
+        <div class="grid lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 tropical-glass p-16">
+                <div class="flex justify-between items-center mb-10 border-b-4 border-slate-900 pb-6">
+                    <h2 class="text-5xl font-black uppercase text-[#39c5bb] tracking-tight">Master Transmission Log Feed</h2>
+                    <span class="bg-slate-900 text-white px-6 py-2 rounded-full text-sm mono uppercase tracking-widest font-bold">Live Uplink Active</span>
+                </div>
+                
+                <p class="text-lg text-slate-700 leading-relaxed mb-6">
+                    Welcome to the central monitoring pipeline for Tricolore Airline. This interactive feed collects synchronized telemetry bursts, synthetic atmospheric density reports, and core quantum state changes broadcasted directly from the cruise engine arrays. Scroll through the terminal history below to inspect active operations or broadcast custom system directives into the ship-wide mainframe network.
+                </p>
+                
+                <div id="master-terminal-logstream" class="space-y-4 h-[600px] overflow-y-auto pr-4 bg-slate-950/90 p-8 rounded-[40px] border-4 border-slate-800 font-mono text-emerald-400 text-sm"></div>
+                
+                <div class="mt-12 pt-8 border-t-4 border-white">
+                    <h4 class="text-xl font-black uppercase tracking-wider mb-6 text-slate-800">Inject Systemic Command Node Log</h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <input id="user-input-operator" type="text" placeholder="OPERATOR ID TOKEN" class="p-5 rounded-3xl bg-white border-2 border-slate-200 focus:outline-none focus:border-[#39c5bb] font-bold text-sm uppercase shadow-inner">
+                        <input id="user-input-payload" type="text" placeholder="TRANSMISSION DATA PAYLOAD VECTOR" class="md:col-span-2 p-5 rounded-3xl bg-white border-2 border-slate-200 focus:outline-none focus:border-[#39c5bb] font-bold text-sm shadow-inner">
+                    </div>
+                    <button onclick="injectUserLogNode()" class="mt-6 px-10 py-4 bg-slate-900 text-white text-sm font-black tracking-widest uppercase rounded-full hover:bg-[#39c5bb] transition-all transform hover:-translate-y-1 shadow-lg">Transmit Node Package</button>
+                </div>
+            </div>
 
-        <div class="grid lg:grid-cols-4 gap-12 mb-40">
-            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
-                <div class="crew-container"><img src="miku.png" class="crew-img"></div>
-                <h3 class="text-3xl font-black mb-1">Miku</h3>
-                <p class="text-xs font-black text-[#39c5bb] uppercase tracking-widest">Command Captain</p>
-            </div>
-            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
-                <div class="crew-container"><img src="luka.png" class="crew-img"></div>
-                <h3 class="text-3xl font-black mb-1">Luka</h3>
-                <p class="text-xs font-black text-[#ffb6c1] uppercase tracking-widest">Executive Service</p>
-            </div>
-            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
-                <div class="crew-container"><img src="rin.png" class="crew-img"></div>
-                <h3 class="text-3xl font-black mb-1">Rin</h3>
-                <p class="text-xs font-black text-[#f8e71c] uppercase tracking-widest">Flight Tactics</p>
-            </div>
-            <div class="tropical-glass p-10 text-center transition duration-700 hover:-translate-y-6">
-                <div class="crew-container"><img src="meiko.png" class="crew-img"></div>
-                <h3 class="text-3xl font-black mb-1">Meiko</h3>
-                <p class="text-xs font-black text-[#ff4d4d] uppercase tracking-widest">Global Logistics</p>
-            </div>
-        </div>
+            <div class="space-y-8">
+                <div class="tropical-glass p-12 bg-white/60">
+                    <h3 class="text-2xl font-black uppercase tracking-widest mb-6 text-slate-800">Acoustic Resonance Core</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                        Tracks continuous sound-wave feedback across all passenger tiers. Keeps physical structural frames synchronized to prevent phase distortion during mach acceleration.
+                    </p>
+                    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-4 mb-4">
+                        <span class="font-bold text-sm text-slate-600 uppercase tracking-wider">Base Harmonic Line</span>
+                        <span class="mono text-[#39c5bb] font-black text-2xl">440Hz Steady</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-slate-600 uppercase tracking-wider">Calibration State</span>
+                        <span class="bg-[#10B981] text-white px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider">Locked & Verified</span>
+                    </div>
+                </div>
 
-        <div class="tropical-glass p-24 mb-40 grid lg:grid-cols-2 gap-20 items-center">
-            <div class="space-y-10">
-                <h3 class="text-6xl font-black uppercase leading-tight text-slate-900">Premium Sky Perks</h3>
-                <ul class="space-y-6">
-                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#39c5bb] font-bold uppercase text-sm">Holographic Seat Assistants</li>
-                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#ffb6c1] font-bold uppercase text-sm">Real-Time Concert Streaming at 40k Feet</li>
-                    <li class="bg-white/50 p-6 rounded-3xl border-l-8 border-[#f8e71c] font-bold uppercase text-sm">Leek-Infused Refreshment Menu</li>
-                </ul>
-            </div>
-            <div class="bg-slate-900 p-16 rounded-[80px] text-white">
-                <h4 class="text-2xl font-black mb-6 uppercase">System Status</h4>
-                <div class="space-y-4">
-                    <div class="flex justify-between"><span>Vivace Engines</span><span class="text-[#39c5bb]">Optimal</span></div>
-                    <div class="flex justify-between"><span>Cabin Melody</span><span class="text-[#39c5bb]">440Hz</span></div>
-                    <div class="flex justify-between"><span>Tropical Saturation</span><span class="text-[#39c5bb]">100 percent</span></div>
+                <div class="tropical-glass p-12 border-4 border-[#ffb6c1] bg-white/50">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-4 h-4 rounded-full bg-red-500 animate-ping"></div>
+                        <h3 class="text-2xl font-black uppercase tracking-widest text-[#ef4444]">Broadcast Alert Node</h3>
+                    </div>
+                    <p class="mono text-sm font-bold leading-relaxed text-slate-900 bg-white/80 p-6 rounded-3xl border-2 border-red-200">
+                        "THE CABIN IS NOW 90% LEEK. THE COCONUTS ARE ESCAPING. DAYO. IMMEDIATE RESPONSE PARADIGMS DEPLOYED BY THE COMMAND SQUADRON IN ORDER TO ENSURE BIOLOGICAL MATRIX STABILITY."
+                    </p>
+                    <div class="mt-6 pt-4 border-t-2 border-slate-200 flex justify-between items-center text-xs uppercase font-black text-slate-500">
+                        <span>Threat Matrix: Echo-Red</span>
+                        <span>Source: MIKUDAYO-01</span>
+                    </div>
+                </div>
+
+                <div class="tropical-glass p-12 bg-gradient-to-br from-white/80 to-transparent">
+                    <h3 class="text-xl font-black uppercase tracking-widest mb-6 text-slate-800">Real-Time Core Metrics</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between font-bold border-b border-white pb-3"><span>Matrix Computational Load</span><span class="mono text-[#39c5bb] text-lg">39.11%</span></div>
+                        <div class="flex justify-between font-bold border-b border-white pb-3"><span>Leek Condensation Level</span><span class="mono text-[#ffb6c1] text-lg">94.22 g/m³</span></div>
+                        <div class="flex justify-between font-bold border-b border-white pb-3"><span>Blossom Particle Index</span><span class="mono text-[#ff9e7d] text-lg">881.05 ppm</span></div>
+                        <div class="flex justify-between font-bold border-b border-white pb-3"><span>Vocaloid Sync Engine</span><span class="mono text-green-600 text-lg">OPTIMAL Matrix</span></div>
+                        <div class="flex justify-between font-bold"><span>Hyper-Drive Core Temperature</span><span class="mono text-purple-600 text-lg">22.4°C</span></div>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="tropical-glass p-20">
-            <h3 class="text-5xl font-black mb-16 uppercase">Flight Log Archives</h3>
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div id="log-list" class="h-[600px] overflow-y-auto space-y-6 pr-6"></div>
+    <main id="view-book" class="page-view pt-56 pb-24 max-w-[1800px] mx-auto px-8">
+        <div id="booking-master-panel" class="tropical-glass p-16">
+            <div class="border-b-4 border-slate-900 pb-8 mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-center">
+                <div>
+                    <h2 class="text-6xl font-black uppercase tracking-tighter text-slate-900">Coordinate Selection Engine</h2>
+                    <p class="text-sm font-black uppercase tracking-widest text-slate-500 mt-3">Initialize Passenger Manifest Trajectory Vectors & Cabin Topology</p>
+                </div>
+                <div class="mt-6 lg:mt-0 bg-white/90 px-8 py-4 rounded-full border-4 border-white shadow-md flex items-center gap-6">
+                    <span class="text-sm font-black uppercase text-slate-600 tracking-wider">Active Allocations:</span>
+                    <span id="global-allocation-counter" class="mono font-black text-3xl text-[#39c5bb]">0 / 96</span>
+                </div>
+            </div>
+
+            <p class="text-lg text-slate-700 leading-relaxed mb-10 max-w-5xl">
+                Please map passenger units onto the localized deck seating structure below. Choose the token identity matrix, configure the targeted navigation point, and select your flight class luxury grade. The physical grid updates instantly to isolate balanced weights across the aerospace frame structure.
+            </p>
+
+            <div class="grid lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-5 space-y-10">
+                    <div class="bg-white/50 p-10 rounded-[50px] border-4 border-white space-y-8 shadow-inner">
+                        <div>
+                            <label class="font-black text-sm uppercase tracking-[0.2em] text-slate-700 ml-2">Character Unit Identification Token</label>
+                            <input id="form-unit-id" type="text" placeholder="e.g. S-OMORI-004" class="w-full mt-3 p-6 rounded-3xl bg-white text-lg font-bold uppercase shadow-sm border-2 border-slate-200 focus:border-[#39c5bb] focus:outline-none transition-all">
+                        </div>
+                        
+                        <div>
+                            <label class="font-black text-sm uppercase tracking-[0.2em] text-slate-700 ml-2">Target Destination Space Vector</label>
+                            <select id="form-destination-vector" class="w-full mt-3 p-6 rounded-3xl bg-white text-lg font-bold uppercase shadow-sm border-2 border-slate-200 focus:border-[#ffb6c1] focus:outline-none cursor-pointer">
+                                <option value="The Sun Core">The Sun Core Node</option>
+                                <option value="Aqua City Delta">Aqua City Delta Station</option>
+                                <option value="Faraway Station Prime">Faraway Station Prime Grid</option>
+                                <option value="Vocaloid Sector Zero">Vocaloid Sector Zero</option>
+                                <option value="Miku Deep Ocean Trenches">Miku Deep Ocean Trenches</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="font-black text-sm uppercase tracking-[0.2em] text-slate-700 ml-2">Cabin Level Grade Tier</label>
+                            <div class="grid grid-cols-3 gap-3 mt-3">
+                                <button onclick="setManifestTier('Diamond Suite')" class="p-4 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Diamond</button>
+                                <button onclick="setManifestTier('Tropical Gold')" class="p-4 bg-white hover:bg-slate-100 text-slate-800 rounded-2xl text-xs font-black uppercase tracking-widest border-2 border-slate-300 transition-colors">Gold</button>
+                                <button onclick="setManifestTier('Vocaloid Economy')" class="p-4 bg-white hover:bg-slate-100 text-slate-800 rounded-2xl text-xs font-black uppercase tracking-widest border-2 border-slate-300 transition-colors">Economy</button>
+                            </div>
+                            <div class="text-xs font-mono mt-4 text-slate-500 uppercase tracking-widest text-center">Selected Tier Matrix: <span id="label-manifest-tier-status" class="font-black text-slate-900 bg-white/80 px-4 py-1 rounded-full border border-slate-200">Diamond Suite</span></div>
+                        </div>
+                    </div>
+
+                    <button onclick="processManifestSubmission()" class="w-full py-6 rounded-full bg-slate-900 text-white font-black text-2xl uppercase tracking-widest shadow-xl hover:bg-[#39c5bb] transition-all transform hover:-translate-y-2">Lock Spatial Coordinates</button>
+                    <p id="manifest-feedback-output" class="text-center font-black uppercase tracking-widest text-sm mono h-8 text-slate-800 mt-4"></p>
+                </div>
+
+                <div class="lg:col-span-7 bg-white/40 p-12 rounded-[60px] border-4 border-white shadow-inner">
+                    <div class="flex justify-between items-center mb-8">
+                        <span class="text-sm font-black uppercase tracking-widest text-slate-700 font-mono">Left Column [Rows A-C]</span>
+                        <div class="flex gap-6 text-xs font-black uppercase text-slate-600">
+                            <span class="flex items-center gap-2"><span class="w-4 h-4 bg-white/60 border-2 border-slate-400 rounded-md"></span>Available</span>
+                            <span class="flex items-center gap-2"><span class="w-4 h-4 bg-[#39c5bb] rounded-md"></span>Targeted</span>
+                            <span class="flex items-center gap-2"><span class="w-4 h-4 bg-slate-900 rounded-md"></span>Occupied</span>
+                        </div>
+                        <span class="text-sm font-black uppercase tracking-widest text-slate-700 font-mono">Right Column [Rows D-F]</span>
+                    </div>
+                    
+                    <div id="manifest-coordinate-grid" class="grid grid-cols-6 gap-4"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-viva" class="page-view pt-56 pb-24 max-w-[1800px] mx-auto px-8">
+        <div class="grid lg:grid-cols-3 gap-12">
+            <div class="tropical-glass p-16 space-y-8">
+                <h3 class="text-3xl font-black uppercase text-[#39c5bb] border-b-4 border-slate-900 pb-4">Real-Time Core Parameters</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Live flight envelope attributes updated dynamically by quantum sensors mounted across the leading edges of the wings and cabin stabilization foils.
+                </p>
+                
                 <div class="space-y-6">
-                    <div class="bg-white/40 p-12 rounded-[60px] border-4 border-white">
-                        <h4 class="text-2xl font-black mb-8 uppercase">Submit Passenger Log</h4>
-                        <input id="u-name" type="text" placeholder="Pilot Name" class="w-full p-6 rounded-3xl mb-6 bg-white outline-none font-bold uppercase tracking-widest shadow-inner border-none">
-                        <textarea id="u-body" placeholder="Log Description" class="w-full p-6 h-48 rounded-3xl mb-8 bg-white outline-none font-bold shadow-inner border-none"></textarea>
-                        <button onclick="addLog()" class="w-full bg-[#39c5bb] text-white py-8 rounded-full font-black text-xl uppercase tracking-widest shadow-xl">Transmit Log</button>
+                    <div class="bg-white/70 p-6 rounded-3xl border-2 border-white flex justify-between items-center shadow-sm">
+                        <span class="font-black text-sm uppercase tracking-widest text-slate-500">Altitude Matrix</span>
+                        <span id="telemetry-altitude" class="mono text-3xl font-black text-slate-800">39,000 FT</span>
+                    </div>
+                    <div class="bg-white/70 p-6 rounded-3xl border-2 border-white flex justify-between items-center shadow-sm">
+                        <span class="font-black text-sm uppercase tracking-widest text-slate-500">Airspeed Velocity</span>
+                        <span id="telemetry-airspeed" class="mono text-3xl font-black text-slate-800">MACH 0.39</span>
+                    </div>
+                    <div class="bg-white/70 p-6 rounded-3xl border-2 border-white flex justify-between items-center shadow-sm">
+                        <span class="font-black text-sm uppercase tracking-widest text-slate-500">Lens Saturation Index</span>
+                        <span class="mono text-3xl font-black text-[#ffb6c1]">210% MAX</span>
+                    </div>
+                    <div class="bg-white/70 p-6 rounded-3xl border-2 border-white flex justify-between items-center shadow-sm">
+                        <span class="font-black text-sm uppercase tracking-widest text-slate-500">Fuel Compound Stability</span>
+                        <span id="telemetry-fuel" class="mono text-3xl font-black text-green-600">99.88%</span>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button onclick="triggerEmergencyTelemetryBoost()" class="w-full py-5 rounded-full bg-slate-900 text-white font-black text-sm tracking-widest uppercase hover:bg-[#ff9e7d] transition-all shadow-md">Overclock Propulsion Vectors</button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 tropical-glass p-16 space-y-8">
+                <h3 class="text-4xl font-black uppercase tracking-tight text-slate-800 border-b-4 border-slate-900 pb-4">Fleet Global Live Network Logs</h3>
+                
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    Read the automated diagnostic reports emitted by sub-engines, environmental reclamation filters, and structural integrity processors down the core pipeline.
+                </p>
+                
+                <div id="fleet-live-updates-container" class="space-y-6 h-[500px] overflow-y-auto pr-4">
+                    <div class="border-l-[10px] border-[#39c5bb] pl-8 bg-white/50 p-8 rounded-r-[40px] shadow-sm">
+                        <h4 class="font-black text-2xl uppercase mb-2 text-slate-800">Atmospheric Sakura Anomalies Detected</h4>
+                        <p class="text-sm font-medium text-slate-700 leading-relaxed">High concentrations of pink sakura petals reported entering the main turbine arrays at layer 3. Engine computational performance has paradoxically increased by 40.12%. Engineers recommend maintaining current flight path trajectory vector without modification.</p>
+                        <span class="text-xs font-mono font-bold text-slate-400 mt-4 block">TIMESTAMP // 2026.05.18_21:09:55</span>
+                    </div>
+                    <div class="border-l-[10px] border-[#ff9e7d] pl-8 bg-white/50 p-8 rounded-r-[40px] shadow-sm">
+                        <h4 class="font-black text-2xl uppercase mb-2 text-slate-800">Dining Sector System Upgrade Matrix</h4>
+                        <p class="text-sm font-medium text-slate-700 leading-relaxed">Leek-infused organic holographic meals are now being serving across all private layout grids in the Diamond Suite. Initial traveler data logs indicate a complete 100% satisfaction rate among all synthetic and biological entities inside the sector.</p>
+                        <span class="text-xs font-mono font-bold text-slate-400 mt-4 block">TIMESTAMP // 2026.05.18_20:44:12</span>
+                    </div>
+                    <div class="border-l-[10px] border-purple-500 pl-8 bg-white/50 p-8 rounded-r-[40px] shadow-sm">
+                        <h4 class="font-black text-2xl uppercase mb-2 text-slate-800">Quantum Autopilot Engine Sync Phase</h4>
+                        <p class="text-sm font-medium text-slate-700 leading-relaxed">Synchronizing backup sub-processors with Vocaloid Synthesizer Engine 03. Acoustic shielding has isolated cabin vibrations from the main computing blocks. Stability metrics are perfectly static.</p>
+                        <span class="text-xs font-mono font-bold text-slate-400 mt-4 block">TIMESTAMP // 2026.05.18_19:12:01</span>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <main id="page-book" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
-        <div class="tropical-glass p-24 text-center">
-            <h2 class="text-8xl font-black mb-20 uppercase tracking-tighter">Book Flight 39!</h2>
-            <div class="grid lg:grid-cols-3 gap-16 text-left mb-24">
-                <div class="space-y-4">
-                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Departure Vector</label>
-                    <select id="origin" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black uppercase shadow-xl border-none">
-                        <option>Tokyo Narita Sky-Port</option>
-                        <option>Cape Town International</option>
-                        <option>Honolulu Island Terminal</option>
-                    </select>
+    <main id="view-guest" class="page-view pt-56 pb-24 max-w-[1800px] mx-auto px-8 space-y-16">
+        <div class="tropical-glass p-16 relative border-[6px] border-[#39c5bb] bg-white/80">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-10 border-b-4 border-slate-900 pb-8 gap-6">
+                <div>
+                    <span class="text-sm font-black uppercase text-[#39c5bb] tracking-widest mono block">DIAMOND SUITE ACOUSTIC CORE MASTER ARCHIVE // TICKET-04A</span>
+                    <h2 class="text-5xl font-black uppercase text-slate-800 tracking-tighter mt-2">Mari's Log Entry: The Architecture of the Sky Duet</h2>
                 </div>
-                <div class="space-y-4">
-                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Unit Quantity</label>
-                    <input id="qty" type="number" value="1" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black shadow-xl border-none">
-                </div>
-                <div class="space-y-4">
-                    <label class="font-black text-xs uppercase tracking-[0.5em] text-slate-400">Luxury Level</label>
-                    <select id="class" class="w-full p-8 rounded-[40px] bg-white text-2xl font-black uppercase shadow-xl border-none">
-                        <option>Diamond Vivace</option>
-                        <option>Emerald Lagoon</option>
-                        <option>Sunset Economy</option>
-                    </select>
-                </div>
+                <span class="text-sm font-mono font-black text-[#39c5bb] bg-slate-900 text-white px-6 py-2 rounded-full border-2 border-[#39c5bb] whitespace-nowrap shadow-md">SEAT NODE: 04A // MASTER LOG</span>
             </div>
 
-            <div class="bg-white/20 p-20 rounded-[100px] border-4 border-white inline-block mb-20">
-                <h4 class="text-xl font-black uppercase mb-12 tracking-widest">Select Air Coordinates</h4>
-                <div id="seat-map" class="grid grid-cols-4 md:grid-cols-10 gap-6"></div>
+            <div class="text-slate-800 space-y-8 leading-relaxed text-lg max-w-none">
+                <p class="italic font-bold text-xl text-slate-700 border-l-4 border-[#39c5bb] pl-6 py-2 bg-slate-50/50 rounded-r-2xl">
+                    "There is a striking, terrifying purity to performing music at thirty-nine thousand feet. Here, sealed within the glass-sheathed perimeter of the Diamond Suite, the rest of the world dissolves into a soft tapestry of stratospheric teal and fading violet light. But when the grand piano keys break the silence, the music doesn't just float—it reverberates against the cold alloy hull of the aircraft, syncing with the baseline drone of the propulsion engines."
+                </p>
+
+                <h3 class="text-3xl font-black uppercase text-slate-900 pt-4 tracking-tight">Chapter I: The Physics of Harmonic Entrainment</h3>
+                <p>
+                    To play a duet in motion is to enter into a non-linear contract with physics. At Mach 0.39, the acoustic envelope inside the cabin undergoes micro-compressions. The traditional concert hall relies on static masonry to absorb low frequencies, but a luxury aircraft cabin behaves like a compressed brass cylinder. Every string vibration on our piano interacts directly with the 440Hz baseline hum of the ship's climate matrix. We discovered early in our flight that if our timing slips by even a fraction of a millisecond, the resulting acoustic phase cancellation creates a physical pressure wave that shakes the overhead console frames. 
+                </p>
+                <p>
+                    Therefore, the performance demands absolute, flawless mechanical synchronization. The notes cannot wander. They must lock into place, mirroring the exact, unyielding rhythm of the clock generators driving our autopilot core. 
+                </p>
+
+                <h3 class="text-3xl font-black uppercase text-slate-900 pt-4 tracking-tight">Chapter II: The Melodic Memory Layout</h3>
+                <p>
+                    We have spent weeks tracking our musical sequences across the terminal interface. Each movement corresponds to a structural quadrant of the ship: the crystalline ascending scale mimics our initial ascent vector through the pink sakura storm layer, while the deep, resonant bass chords match the pressure distribution in the lower cargo freight bay. I often watch Sunny stare at the keybeds; his eyes trace the linear sequence with an intensity that matches the quantum navigation screens.
+                </p>
+                <p>
+                    When we strike the final key sequence, it triggers an automated bypass routing protocol within the ship's security core, momentarily re-opening the deep blackbox vault where old, encrypted communications are safely buried away from the line crews. It is a secret room engineered from pure harmony, accessible only when two minds move along the exact same frequency matrix.
+                </p>
+
+                <h3 class="text-3xl font-black uppercase text-slate-900 pt-4 tracking-tight">Chapter III: The Sky and the Void</h3>
+                <p>
+                    As we approach the deep ocean trenches near the terminal waypoint, the sunset casts a long, orange-pink hue across our sheet music. It feels as if we are riding on the edge of eternity, forever caught between the sky above and the heavy sea below. The leek aroma drifting from the hydrotherapy filtration deck acts as a bizarre sensory anchor, reminding us that we are still bound to this magnificent, chaotic, synthetic machine. We will keep playing. We must keep playing. Until the engines spin down and the flight path safely brings us back to earth.
+                </p>
             </div>
 
-            <button onclick="generateTicket()" class="w-full py-10 rounded-full bg-slate-900 text-white font-black text-4xl uppercase tracking-[0.2em] shadow-3xl hover:bg-[#39c5bb] transition">Confirm Flight Data</button>
-            <div id="ticket-final" class="mt-16 hidden p-20 bg-white rounded-[80px] border-8 border-double border-[#39c5bb] text-left">
-                <h3 class="text-5xl font-black mb-6 uppercase">Tricolore Boarding Pass</h3>
-                <div id="ticket-text" class="text-2xl font-black uppercase leading-relaxed text-slate-500 italic"></div>
-            </div>
-        </div>
-    </main>
+            <div class="mt-16 pt-12 border-t-4 border-slate-300">
+                <h3 class="text-3xl font-black uppercase text-slate-900 tracking-tight mb-8 flex items-center gap-3">
+                    <span>🛸 Operator Feedback & Transmission Rebuttals</span>
+                    <span class="text-sm bg-[#39c5bb] text-white px-3 py-1 rounded-md mono font-bold">6 Messages Active</span>
+                </h3>
 
-    <main id="page-viva" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-3 gap-16">
-            <div class="lg:col-span-2 space-y-16">
-                <div class="tropical-glass p-20">
-                    <h2 class="text-6xl font-black mb-16 uppercase text-[#39c5bb]">Global Vocaloid Network News</h2>
-                    <div class="space-y-20">
-                        <div class="border-b-4 border-white pb-10">
-                            <h3 class="text-3xl font-black uppercase tracking-tight">Magical Mirai 2026: Solar System Tour</h3>
-                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">Crypton Future Media has confirmed that the 2026 concert series will utilize 8K transparent OLED panels for a three-dimensional stage presence. Tokyo and Osaka dates are sold out.</p>
+                <div class="space-y-6">
+                    <div class="bg-white/60 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-slate-800 flex items-center gap-2">👤 SUNNY_UNIT <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Seat 04B</span></span>
+                            <span class="mono text-slate-400">2026.05.18 21:12:02</span>
                         </div>
-                        <div class="border-b-4 border-white pb-10">
-                            <h3 class="text-3xl font-black uppercase tracking-tight">V6 Harmony AI Implementation</h3>
-                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">The new Harmony Engine allows Luka and Miku to detect the mood of the audience and adjust their vocal tone in real-time. Tricolore Airlines is the first to integrate this into seatback entertainment.</p>
+                        <p class="text-sm text-slate-700 font-mono">The sequence is steady. Node 1, Node 2, Node 3, Node 4. I am keeping my eyes on the sheet music this time. The hull vibrations feel lighter when we play together. I won't lose the rhythm again.</p>
+                    </div>
+
+                    <div class="bg-white/60 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-slate-800 flex items-center gap-2">🌱 BASIL_UNIT <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Seat 05C</span></span>
+                            <span class="mono text-slate-400">2026.05.18 21:15:40</span>
                         </div>
-                        <div class="border-b-4 border-white pb-10">
-                            <h3 class="text-3xl font-black uppercase tracking-tight">Project Sekai Global 2026 Expansion</h3>
-                            <p class="text-xl text-slate-600 mt-6 font-bold italic leading-relaxed">A new tropical resort world is being added to the game, featuring exclusive Tricolore Airline uniforms for all characters.</p>
+                        <p class="text-sm text-slate-700">Mari, this essay is so beautiful! It makes me feel much safer up here. I brought some fresh flowers from the hydro deck to place on the piano lid. I hope the petal pollen doesn't mess up the key switches!</p>
+                    </div>
+
+                    <div class="bg-white/60 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-slate-800 flex items-center gap-2">🏀 KEL_UNIT <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Seat 09A</span></span>
+                            <span class="mono text-slate-400">2026.05.18 21:20:11</span>
                         </div>
+                        <p class="text-sm text-slate-700">YOOOO this is crazy deep! I don't know much about phase cancel-whatever things but the piano sounds awesome down the hall! Hey, can we order more of those carbonized coconut sodas? Hero says I am reaching my structural beverage ceiling limit but I'm still thirsty!</p>
+                    </div>
+
+                    <div class="bg-white/60 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-slate-800 flex items-center gap-2">🍳 HERO_UNIT <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Seat 10D</span></span>
+                            <span class="mono text-slate-400">2026.05.18 21:24:59</span>
+                        </div>
+                        <p class="text-sm text-slate-700">Exquisite analysis, Mari. I've noticed the micro-compressions too while working in the kitchen galley. The water boils differently based on whether you guys are playing in major or minor scales. Keep up the amazing work, you two are making this flight unforgettable.</p>
+                    </div>
+
+                    <div class="bg-white/60 p-6 rounded-3xl border border-[#ffb6c1] shadow-sm">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-[#ffb6c1] flex items-center gap-2">💖 AUBREY_UNIT <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Seat 12B</span></span>
+                            <span class="mono text-slate-400">2026.05.18 21:30:15</span>
+                        </div>
+                        <p class="text-sm text-slate-700 italic">"Okay, fine, the piano sounds absolutely beautiful, I admit it. But can someone PLEASE explain why Captain Miku is blast-looping synthetic vocal pop through the main engine exhaust grids while this is happening?! It's an absolute battle of genres out here."</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-6 rounded-3xl border-2 border-[#39c5bb] shadow-md">
+                        <div class="flex justify-between text-sm font-bold uppercase mb-2">
+                            <span class="text-[#39c5bb] flex items-center gap-2">🎤 CAPTAIN_MIKU_01 <span class="text-xs bg-[#39c5bb]/20 text-[#39c5bb] px-2 py-0.5 rounded">Flight Deck</span></span>
+                            <span class="mono text-teal-400">2026.05.18 21:40:00</span>
+                        </div>
+                        <p class="text-sm font-mono text-slate-300">AUTHENTICATION COMPLIANT: Grand piano acoustic output matrix is currently assisting sub-turbine engine balancing parameters by 12.44%! Keep up the duet frequency! The digital leeks are glowing in harmony! 39000 feet has never sounded this synchronized! 🟩✨</p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="space-y-16">
-                <div class="tropical-glass p-12 text-center">
-                    <h3 class="text-3xl font-black mb-10 uppercase tracking-widest">Puyo Command</h3>
-                    <div id="puyo-grid" class="grid grid-cols-3 gap-6 p-8 bg-slate-900/10 rounded-[60px] mx-auto w-fit"></div>
-                    <p class="mt-8 text-xs font-black uppercase text-[#39c5bb]">Initialize color matches</p>
-                    <button onclick="genPuyo()" class="mt-10 bg-slate-900 text-white px-12 py-4 rounded-full font-black uppercase text-xs">Reset Matrix</button>
+        <div class="tropical-glass p-16 border-r-[50px] border-[#ffb6c1] bg-white/70">
+            <div class="flex justify-between items-start mb-8">
+                <div>
+                    <span class="text-xs font-black uppercase text-[#ffb6c1] tracking-widest mono block">CABIN COMFORT EVALUATION DISCREPANCY TICKET</span>
+                    <h3 class="text-4xl font-black uppercase text-slate-800 tracking-tighter mt-2">Aubrey's Log Entry <span class="text-[#ffb6c1]">#12B</span></h3>
                 </div>
-                <div class="tropical-glass p-12">
-                    <h3 class="text-2xl font-black mb-6 uppercase">Live Flight Stats</h3>
-                    <div class="space-y-4 font-black uppercase text-xs">
-                        <div class="flex justify-between"><span>Altitude</span><span>39,000 ft</span></div>
-                        <div class="flex justify-between"><span>Airspeed</span><span>Mach 0.39</span></div>
-                        <div class="flex justify-between"><span>Destination</span><span>The Sun</span></div>
+                <span class="text-sm font-mono font-bold text-slate-400 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">SEAT NODE: 12B // CRITICAL LEVEL</span>
+            </div>
+            <p class="text-xl font-medium italic leading-relaxed text-slate-700 bg-white/80 p-8 rounded-[40px] border-2 border-slate-100 shadow-inner mb-6">
+                "Okay, who designed this cabin architecture layout?! The excessive teal color styling on every single interface screen and lighting panel is literally giving me an aggressive migraine. And please, for the love of god, take these weird leek snacks off the premium lounge menu immediately. I am completely begging you. Also, if I have to be stuck up here for hours, can we AT LEAST turn up the master cabin subwoofer bass mix? It’s way too quiet in this sector and needs more physical punch."
+            </p>
+        </div>
+    </main>
+
+    <main id="view-jiafei" class="page-view pt-56 pb-24 max-w-[1800px] mx-auto px-8">
+        <div class="tropical-glass p-16">
+            <div class="border-b-4 border-slate-900 pb-6 mb-10">
+                <h2 class="text-5xl font-black uppercase tracking-tight text-slate-800">Automated Jiafei Retail Matrix</h2>
+                <p class="text-sm font-black text-[#ffb6c1] uppercase tracking-widest mt-2">Authorized Automated Retail Acquisition Nodes</p>
+            </div>
+            
+            <p class="text-lg text-slate-600 leading-relaxed mb-10 max-w-4xl">
+                Browse our curated selection of high-fidelity molecular supplements, acoustic dampeners, and luxury aerospace merchandise available for instant deployment straight to your seat.
+            </p>
+
+            <div class="grid lg:grid-cols-4 gap-10 items-start">
+                <div class="lg:col-span-3 grid md:grid-cols-3 gap-8">
+                    <div class="tropical-glass tropical-glass-sm p-8 text-center flex flex-col justify-between min-h-[460px] bg-white/60 hover:scale-[1.04] transition-all duration-300">
+                        <div>
+                            <div class="h-36 w-36 mx-auto bg-gradient-to-br from-[#39c5bb] to-[#ffb6c1] rounded-full mb-6 shadow-xl"></div>
+                            <h3 class="text-2xl font-black uppercase tracking-tight text-slate-800">Vivace Serum Node</h3>
+                            <p class="text-xs text-slate-500 mt-2 uppercase font-bold px-4">Instant biological sync acceleration formula</p>
+                        </div>
+                        <div class="mt-6">
+                            <p class="text-xl font-black text-[#39c5bb] mono mb-4">39.99 RMB</p>
+                            <button onclick="addRetailItemToCart('Vivace Serum Node', 39.99)" class="w-full bg-slate-900 text-white py-4 rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#39c5bb] transition-colors shadow-md">Add to Cart</button>
+                        </div>
                     </div>
+                    <div class="tropical-glass tropical-glass-sm p-8 text-center flex flex-col justify-between min-h-[460px] bg-white/60 hover:scale-[1.04] transition-all duration-300">
+                        <div>
+                            <div class="h-36 w-36 mx-auto bg-gradient-to-br from-[#ff9e7d] to-purple-400 rounded-full mb-6 shadow-xl"></div>
+                            <h3 class="text-2xl font-black uppercase tracking-tight text-slate-800">Acoustic Shielding</h3>
+                            <p class="text-xs text-slate-500 mt-2 uppercase font-bold px-4">Isolates your personal spatial coordinate layer</p>
+                        </div>
+                        <div class="mt-6">
+                            <p class="text-xl font-black text-[#39c5bb] mono mb-4">120.00 RMB</p>
+                            <button onclick="addRetailItemToCart('Acoustic Shielding', 120.00)" class="w-full bg-slate-900 text-white py-4 rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#39c5bb] transition-colors shadow-md">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="tropical-glass tropical-glass-sm p-8 text-center flex flex-col justify-between min-h-[460px] bg-white/60 hover:scale-[1.04] transition-all duration-300">
+                        <div>
+                            <div class="h-36 w-36 mx-auto bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full mb-6 shadow-xl"></div>
+                            <h3 class="text-2xl font-black uppercase tracking-tight text-slate-800">SCREAMING Fruit</h3>
+                            <p class="text-xs text-slate-500 mt-2 uppercase font-bold px-4">DONT! BUY!</p>
+                        </div>
+                        <div class="mt-6">
+                            <p class="text-xl font-black text-[#39c5bb] mono mb-4">9.99 RMB</p>
+                            <button onclick="addRetailItemToCart('Premium Organic Leek', 9.99)" class="w-full bg-slate-900 text-white py-4 rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#39c5bb] transition-colors shadow-md">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white p-10 rounded-[50px] shadow-2xl border-4 border-white space-y-6">
+                    <h3 class="text-2xl font-black uppercase tracking-wide text-white border-b border-white/20 pb-4">Manifest Basket</h3>
+                    <div id="jiafei-retail-cart-rows" class="space-y-4 max-h-[300px] overflow-y-auto font-mono text-xs text-slate-300">
+                        <p class="italic text-slate-500">Acquisition grid empty.</p>
+                    </div>
+                    <div class="border-t border-white/20 pt-4 flex justify-between items-center font-bold text-lg">
+                        <span>Aggregate</span>
+                        <span id="jiafei-retail-total-sum" class="mono text-[#39c5bb] font-black text-2xl">0.00 RMB</span>
+                    </div>
+                    <button onclick="executeRetailCheckout()" class="w-full py-4 bg-[#39c5bb] text-slate-950 font-black text-sm uppercase tracking-widest rounded-full hover:bg-white hover:scale-105 transition-all shadow-lg">Checkout Nodes</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <main id="page-guests" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
-        <div class="tropical-glass p-24 border-r-[60px] border-[#ffb6c1] shadow-3xl">
-            <div class="flex flex-col lg:flex-row gap-20 items-center">
-                <div class="w-80 h-80 rounded-full border-8 border-white shadow-3xl overflow-hidden shrink-0 bg-white">
-                    <img src="mpfp.png" class="w-100 h-100 object-cover">
-                </div>
-                <div class="flex-1 space-y-10">
-                    <h3 class="text-8xl font-black text-[#ffb6c1] uppercase tracking-tighter italic">Mikudayo</h3>
-                    <div class="text-3xl text-slate-700 leading-relaxed font-black lowercase italic space-y-10">
-                        <p>omg literally where do i even start!! tricolore is the ONLY way to travel like i am actually obsessed with the vibe in here!! every time i walk into the diamond lounge i feel like i am floating in a giant bubble of teal happiness and the cabin pressure is literally perfect for my voice and my hearing which is so rare on flights lol!!</p>
-                        <p>miku is the best captain ever because she actually lets me practice my piano in the diamond suite whenever i want and she even brings me fresh coconuts with teal straws while i am working on my scales!! it is so aesthetic and peaceful up here and the view of the sunset through the massive glass wings actually made me cry a little because it was so pretty!! i am writing a whole new album just about the clouds we saw over the ocean yesterday and i named a song after the vivace hub because it is my favorite place in the world now!! i never want to land i just want to stay up here in the sky forever with miku and luka and the rest of the crew!! see you next time miku ilysm!!</p>
-                    </div>
-                </div>
+    <main id="view-safe" class="page-view pt-56 pb-24 max-w-[1500px] mx-auto px-8">
+        <div class="tropical-glass p-16 space-y-12">
+            <div class="border-b-4 border-slate-900 pb-6">
+                <h2 class="text-5xl font-black uppercase text-slate-900 tracking-tight">Tropical Safety & Regulation Protocols</h2>
+                <p class="text-sm font-black text-[#39c5bb] uppercase tracking-widest mt-2">Emergency Core Isolation Matrix & Contingencies</p>
             </div>
-            <div class="mt-24 bg-white/40 p-16 rounded-[100px] border-4 border-[#ffb6c1]">
-                <h4 class="font-black text-[#ffb6c1] uppercase text-sm mb-6 tracking-[0.8em]">Official Executive Response</h4>
-                <p class="text-2xl font-black text-slate-800 italic leading-relaxed">Dear Mikudayo, the melody of your piano echoing through the fuselage is the highest honor our airline could receive. We have permanently reserved seat 01A in the Diamond Suite for your exclusive use. The galley has been instructed to keep a fresh supply of coconuts on ice for all your future flights. Your music makes the sky a better place.</p>
+
+            <p class="text-lg text-slate-700 leading-relaxed max-w-5xl">
+                Please familiarize yourself with our automated structural fail-safes designed by the Tropical Cyberpunk Design Group. These mandates ensure complete biological preservation during high-speed vector tracking across deep oceanic air rifts.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="bg-slate-900 text-white p-10 rounded-[50px] shadow-xl border-4 border-[#39c5bb]">
+                    <span class="mono text-[11px] text-[#39c5bb] font-bold block mb-2">PROTOCOL ALPHA // TYPE 01</span>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tight text-[#39c5bb]">Melodic Cabin Depressurization</h4>
+                    <p class="text-xs font-medium leading-relaxed opacity-90 italic">
+                        In the highly improbable scenario of automated hull layout envelope pressure displacement, targeted teal leek-shaped high-flow oxygen masks will mechanically descend from overhead access channels. Affix the modular seal matrix safely over your oral airway and immediately commence humming at a continuous, steady 440Hz vocal frequency pattern to preserve personal lung equilibrium vectors. Remember our primary corporate reassuring flight motto: "WE HOPE YOU MAKE IT!!!!"
+                    </p>
+                </div>
+
+                <div class="bg-[#ffb6c1] text-slate-900 p-10 rounded-[50px] shadow-xl border-4 border-white">
+                    <span class="mono text-[11px] text-slate-700 font-bold block mb-2">PROTOCOL BETA // TYPE 02</span>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tight">Electronic Frequency Interference</h4>
+                    <p class="text-xs font-bold leading-relaxed text-slate-800 italic">
+                        All traveler communication arrays and handheld quantum compute decks must be definitively assigned to Flight Isolation Safe Mode during taxi and rapid vector accent. However, localized Vocaloid-enabled synthesis configurations, audio workbenches, and tracking engines are totally exempt from this regulatory mandate and may remain active for creative deployment across all baseline timelines.
+                    </p>
+                </div>
+
+                <div class="bg-[#39c5bb] text-white p-10 rounded-[50px] shadow-xl border-4 border-white">
+                    <span class="mono text-[11px] text-slate-900 font-bold block mb-2">PROTOCOL GAMMA // TYPE 03</span>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tight">Ocean Descent Trajectory</h4>
+                    <p class="text-xs font-bold leading-relaxed text-slate-950 italic">
+                        Should the pilot decide to merge tracking matrices with underwater currents, all windows will adjust their polarity filters instantly. Biological units must remain securely buckled to isolate their centers of mass from deep gravitational compression waves.
+                    </p>
+                </div>
             </div>
         </div>
     </main>
 
-    <main id="page-safety" class="page-view pt-72 pb-20 max-w-7xl mx-auto px-6">
-        <div class="tropical-glass p-24 text-center">
-            <h2 class="text-7xl font-black mb-20 uppercase text-[#39c5bb]">Tactical Safety Protocols</h2>
-            <div class="grid lg:grid-cols-2 gap-20 text-left">
-                <div class="space-y-12">
-                    <div class="bg-slate-900 text-white p-12 rounded-[60px]">
-                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Melodic Depressurization</h4>
-                        <p class="text-xl italic font-medium leading-relaxed">In the rare event of cabin pressure loss, teal leek-shaped oxygen masks will descend from the ceiling. Place the mask over your face and continue humming at a steady 440Hz frequency to maintain lung stability Our motto is "WE HOPE YOU MAKE IT!!!!".</p>
+    <main id="view-lounge" class="page-view pt-56 pb-24 max-w-[1500px] mx-auto px-8">
+        <div class="tropical-glass p-16 grid lg:grid-cols-2 gap-12">
+            <div class="space-y-6">
+                <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight border-b-2 border-slate-300 pb-4">Diamond Suite Beverage Mixer</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Craft customized molecular fluid cocktails using our automated robotic dispenser valves. Add fluid elements to your vessel, then agitate the molecular bond to finalize execution.
+                </p>
+                
+                <div class="space-y-4 bg-white/40 p-8 rounded-[40px] border-2 border-white">
+                    <div class="flex gap-3">
+                        <button onclick="addDrinkIngredient('Liquid Vocaloid Leek Essence')" class="flex-1 p-5 bg-white border border-slate-200 rounded-2xl font-bold text-xs uppercase hover:bg-[#39c5bb] hover:text-white transition-all shadow-sm">Liquid Vocaloid Leek Essence</button>
+                        <button onclick="addDrinkIngredient('Stratospheric Blossom Serum')" class="flex-1 p-5 bg-white border border-slate-200 rounded-2xl font-bold text-xs uppercase hover:bg-[#ffb6c1] hover:text-white transition-all shadow-sm">Stratospheric Blossom Serum</button>
                     </div>
-                    <div class="bg-[#39c5bb] text-white p-12 rounded-[60px]">
-                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Ocean Descent</h4>
-                        <p class="text-xl italic font-medium leading-relaxed">If the aircraft lands on water, your seat cushion can be used as a flotation device. Each cushion is equipped with a waterproof speaker playing an 8-bit version of Ievan Polkka to signal for rescue.</p>
-                    </div>
-                </div>
-                <div class="space-y-12">
-                    <div class="bg-[#ffb6c1] text-white p-12 rounded-[60px]">
-                        <h4 class="text-3xl font-black mb-6 uppercase tracking-widest">Electronic Interference</h4>
-                        <p class="text-xl italic font-medium leading-relaxed">All electronic devices must be set to Flight Mode. However, Vocaloid-enabled synthesizers are exempt from this rule and may be operated at all times during the flight.</p>
-                    </div>
-                    <div class="bg-white p-12 rounded-[60px] shadow-2xl">
-                        <h3 class="text-4xl font-black uppercase text-slate-800 mb-6">Emergency Exits</h3>
-                        <p class="text-xl font-black text-slate-400">Located at the front, middle, and rear. Follow the glowing teal floor lights to the nearest exit path.</p>
+                    <div class="flex gap-3">
+                        <button onclick="addDrinkIngredient('Carbonized Coconut Nectar')" class="flex-1 p-5 bg-white border border-slate-200 rounded-2xl font-bold text-xs uppercase hover:bg-[#ff9e7d] hover:text-white transition-all shadow-sm">Carbonized Coconut Nectar</button>
+                        <button onclick="addDrinkIngredient('Synthetic Teal Dye 03')" class="flex-1 p-5 bg-white border border-slate-200 rounded-2xl font-bold text-xs uppercase hover:bg-slate-900 hover:text-white transition-all shadow-sm">Synthetic Teal Dye 03</button>
                     </div>
                 </div>
+                <button onclick="mixBeveragePayload()" class="w-full py-5 bg-slate-900 text-white font-black text-sm uppercase tracking-widest rounded-full hover:bg-[#39c5bb] transition-colors shadow-md">Agitate Molecular Bond</button>
+            </div>
+
+            <div class="bg-white/40 p-10 rounded-[50px] border-4 border-white flex flex-col justify-between">
+                <div>
+                    <h4 class="font-black text-sm uppercase text-slate-700 tracking-wider mb-6 border-b border-slate-200 pb-2 font-mono">Vessel Formulation State</h4>
+                    <div id="drink-mixer-ingredients-list" class="space-y-3 text-xs font-mono font-bold text-slate-800 bg-white/50 p-6 rounded-3xl border border-slate-200 h-[220px] overflow-y-auto">
+                        <p class="text-slate-400 italic">No ingredients compiled into vessel yet.</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-6 bg-slate-900 rounded-3xl text-center shadow-inner">
+                    <span class="text-xs font-mono text-[#39c5bb] uppercase tracking-widest block mb-2">Resulting Mix Signature</span>
+                    <p id="drink-mixer-output-status" class="text-white font-black text-sm uppercase tracking-widest">Awaiting Agitation Signal...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-radar" class="page-view pt-56 pb-24 max-w-[1200px] mx-auto px-8 text-center">
+        <div class="tropical-glass p-16 space-y-8">
+            <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Meteorological Radar Plotter Node</h2>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                Sweeps active flight airspace for ion turbulence or floating cherry blossom clouds. Re-run sweeps regularly to confirm path clarity.
+            </p>
+            <div id="weather-radar-plotter-canvas" class="bg-slate-950 border-4 border-slate-800 rounded-[50px] p-16 min-h-[260px] flex flex-col justify-center items-center gap-3 shadow-2xl font-mono text-sm text-emerald-400">
+                <p class="text-green-400 font-bold tracking-widest">[NO ECHO INTERFERENCE REGISTERED IN VECTOR FLIGHT STREAM]</p>
+                <p class="text-slate-500 text-xs">Azimuth Sweep: 360° // Sweep Rate: 44Hz // Beam Density: Stable</p>
+            </div>
+            <button onclick="rebootWeatherRadarSweep()" class="px-12 py-5 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#39c5bb] transition-all shadow-md">Execute Interactive Range Sweep</button>
+        </div>
+    </main>
+
+    <main id="view-freight" class="page-view pt-56 pb-24 max-w-[1600px] mx-auto px-8">
+        <div class="tropical-glass p-16 grid lg:grid-cols-3 gap-12">
+            <div class="bg-white/50 p-10 rounded-[50px] border-4 border-white space-y-6 shadow-inner">
+                <h3 class="text-2xl font-black uppercase text-slate-800 border-b border-slate-200 pb-3 font-mono">Manifest New Freight</h3>
+                <div>
+                    <label class="text-xs font-black uppercase text-slate-500 block mb-2 font-mono">Cargo Item Designation</label>
+                    <input id="freight-input-name" type="text" placeholder="e.g. Spare Synthesizer Core" class="w-full p-4 rounded-2xl bg-white border border-slate-200 font-bold text-xs uppercase focus:outline-none focus:border-[#39c5bb]">
+                </div>
+                <div>
+                    <label class="text-xs font-black uppercase text-slate-500 block mb-2 font-mono">Mass Allocation Metric (KG)</label>
+                    <input id="freight-input-weight" type="number" placeholder="e.g. 150" class="w-full p-4 rounded-2xl bg-white border border-slate-200 font-bold text-xs mono focus:outline-none focus:border-[#39c5bb]">
+                </div>
+                <button onclick="appendFreightItemRow()" class="w-full py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-[#39c5bb] transition-colors shadow-md">Register Mass Package</button>
+            </div>
+
+            <div class="lg:col-span-2 bg-white/40 p-10 rounded-[50px] border-4 border-white flex flex-col justify-between shadow-inner">
+                <div>
+                    <div class="flex justify-between items-center mb-6 border-b-2 border-slate-200 pb-3">
+                        <h3 class="text-2xl font-black uppercase text-slate-800">Lower Cargo Deck Balance Registry</h3>
+                        <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-widest">MAX CEILING: 50,000 KG</span>
+                    </div>
+                    <div id="freight-items-table-wrapper" class="space-y-3 h-[300px] overflow-y-auto pr-2"></div>
+                </div>
+                <div class="mt-6 p-6 bg-slate-900 text-white rounded-3xl flex justify-between items-center font-mono text-sm shadow-inner">
+                    <span class="uppercase font-bold tracking-widest text-[#ffb6c1]">Total Registered Mass:</span>
+                    <span id="freight-label-total-mass" class="text-xl font-black text-[#39c5bb]">0 KG</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-theater" class="page-view pt-56 pb-24 max-w-[1200px] mx-auto px-8 text-center">
+        <div class="tropical-glass p-16 space-y-8">
+            <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Holo-Deck Acoustic Projection Theater</h2>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                Controls the holographic scenery panels within the core entertainment sectors. Toggle ambient configurations to mutate the internal layout visuals instantly.
+            </p>
+            <div id="hologram-theater-projection-surface" class="bg-gradient-to-tr from-slate-950 to-slate-900 rounded-[50px] p-16 min-h-[220px] flex items-center justify-center border-4 border-slate-800 font-mono text-sm text-[#ffb6c1] shadow-2xl animate-pulse">
+                [AMUSEMENT MATRIX: TRICOLORE TROPICAL OCEAN HORIZON ALIGNED]
+            </div>
+            <div class="flex gap-4 justify-center">
+                <button onclick="mutateHologramTheaterScenery('Cyberpunk Neon Sakura Reef')" class="px-6 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-[#39c5bb] shadow-sm">Sakura Reef Theme</button>
+                <button onclick="mutateHologramTheaterScenery('Miku Deep Trench Synthesis Core')" class="px-6 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-[#ffb6c1] text-slate-900 shadow-sm">Deep Trench Theme</button>
+                <button onclick="mutateHologramTheaterScenery('Retro Sunset Horizon Grid')" class="px-6 py-4 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-[#ff9e7d] shadow-sm">Sunset Horizon Theme</button>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-hydro" class="page-view pt-56 pb-24 max-w-[1600px] mx-auto px-8">
+        <div class="tropical-glass p-16 grid lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 bg-white/40 p-12 rounded-[50px] border-4 border-white space-y-8 shadow-inner">
+                <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Hydro-Botanical Filtration Pod Matrix</h2>
+                <p class="text-sm font-medium text-slate-600 leading-relaxed">
+                    The botanical deck monitors oxygen regeneration cycles driven by imported organic leek strains cultivated under specific spectrum arrays. Adjust pod irrigation rates below to cycle structural fluid pipelines.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-white/90 rounded-3xl border border-slate-200 flex justify-between items-center shadow-sm">
+                        <div>
+                            <h4 class="font-black text-sm uppercase text-slate-800">Pod Alpha Nutrient Flow</h4>
+                            <span id="hydro-label-pod1" class="text-xs font-mono text-slate-400 uppercase font-bold tracking-wider">Flow Status: Standard</span>
+                        </div>
+                        <button onclick="adjustHydroPodIrrigation(1)" class="px-5 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase shadow-sm hover:bg-[#39c5bb]">Cycle Flow</button>
+                    </div>
+                    <div class="p-6 bg-white/90 rounded-3xl border border-slate-200 flex justify-between items-center shadow-sm">
+                        <div>
+                            <h4 class="font-black text-sm uppercase text-slate-800">Pod Beta Moisture Node</h4>
+                            <span id="hydro-label-pod2" class="text-xs font-mono text-slate-400 uppercase font-bold tracking-wider">Flow Status: Standard</span>
+                        </div>
+                        <button onclick="adjustHydroPodIrrigation(2)" class="px-5 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase shadow-sm hover:bg-[#39c5bb]">Cycle Flow</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-900 text-white p-12 rounded-[50px] flex flex-col justify-between shadow-2xl border-4 border-white">
+                <h3 class="text-2xl font-black uppercase text-[#39c5bb] border-b border-white/10 pb-4 font-mono">Atmospheric O2 Mix</h3>
+                <div class="space-y-4 font-mono text-xs">
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>Leek Oxygen Purity</span><span class="text-green-400 font-bold">99.12%</span></div>
+                    <div class="flex justify-between border-b border-white/5 pb-2"><span>Algal Fluid Saturation</span><span class="text-[#39c5bb] font-bold">44.08 ppm</span></div>
+                    <div class="flex justify-between"><span>Filtration Status</span><span class="bg-[#10B981] text-slate-950 px-2 py-0.5 rounded font-black">STABLE</span></div>
+                </div>
+                <p class="text-[11px] text-slate-400 italic mt-6 leading-relaxed">
+                    Continuous monitoring ensures the cabin climate array preserves optimal breathing variables across all mach cruise phases.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-vault" class="page-view pt-56 pb-24 max-w-[1400px] mx-auto px-8">
+        <div class="tropical-glass p-16">
+            <h2 class="text-4xl font-black uppercase text-slate-800 border-b-4 border-slate-900 pb-4 mb-8">Flight Blackbox Decryption Terminal</h2>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                Extract binary logs directly from the armored structural recording core container. Requires authorization sequence alignment.
+            </p>
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="bg-white/50 p-8 rounded-[40px] border-2 border-white flex flex-col justify-center gap-4">
+                    <button onclick="readBlackboxDataDump('telemetry')" class="w-full py-4 bg-slate-900 text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-[#39c5bb]">Dump Flight Telemetry</button>
+                    <button onclick="readBlackboxDataDump('environment')" class="w-full py-4 bg-slate-900 text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-[#ffb6c1] text-slate-950">Dump Env Regulators</button>
+                </div>
+                <div class="lg:col-span-3 bg-slate-950 p-8 rounded-[40px] border-4 border-slate-800 shadow-2xl">
+                    <div class="flex justify-between text-xs text-slate-500 font-mono mb-4 uppercase tracking-widest">
+                        <span>Binary Stream Output</span>
+                        <span class="text-green-500 animate-pulse">Ready</span>
+                    </div>
+                    <pre id="blackbox-vault-terminal-stream" class="mono text-sm text-green-400 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[300px]">Awaiting extraction execution command selection...</pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-engine" class="page-view pt-56 pb-24 max-w-[1600px] mx-auto px-8">
+        <div class="tropical-glass p-16 grid lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 bg-white/40 p-12 rounded-[50px] border-4 border-white space-y-8 shadow-inner">
+                <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Thermodynamic Propulsion Grid Arrays</h2>
+                <p class="text-sm font-medium text-slate-600 leading-relaxed">
+                    Controls plasma output and synchronization metrics across four hyper-combustion engine blocks. Adjust core induction frequencies below to stabilize parameters.
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="p-5 bg-slate-900 text-white rounded-3xl text-center shadow-lg">
+                        <span class="mono text-[11px] text-[#39c5bb] font-bold block mb-2">GRID 01</span>
+                        <p id="label-engine-node1" class="font-black text-sm uppercase text-slate-100">94.2% Hz</p>
+                        <button onclick="overclockEngineCoreNode(1)" class="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest block mx-auto">Boost</button>
+                    </div>
+                    <div class="p-5 bg-slate-900 text-white rounded-3xl text-center shadow-lg">
+                        <span class="mono text-[11px] text-[#39c5bb] font-bold block mb-2">GRID 02</span>
+                        <p id="label-engine-node2" class="font-black text-sm uppercase text-slate-100">94.2% Hz</p>
+                        <button onclick="overclockEngineCoreNode(2)" class="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest block mx-auto">Boost</button>
+                    </div>
+                    <div class="p-5 bg-slate-900 text-white rounded-3xl text-center shadow-lg">
+                        <span class="mono text-[11px] text-[#39c5bb] font-bold block mb-2">GRID 03</span>
+                        <p id="label-engine-node3" class="font-black text-sm uppercase text-slate-100">94.2% Hz</p>
+                        <button onclick="overclockEngineCoreNode(3)" class="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest block mx-auto">Boost</button>
+                    </div>
+                    <div class="p-5 bg-slate-900 text-white rounded-3xl text-center shadow-lg">
+                        <span class="mono text-[11px] text-[#39c5bb] font-bold block mb-2">GRID 04</span>
+                        <p id="label-engine-node4" class="font-black text-sm uppercase text-slate-100">94.2% Hz</p>
+                        <button onclick="overclockEngineCoreNode(4)" class="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest block mx-auto">Boost</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-white/70 to-transparent p-12 rounded-[50px] border-4 border-white flex flex-col justify-between shadow-inner">
+                <h4 class="font-black uppercase text-slate-700 tracking-wider text-sm font-mono mb-4">Combustion Core Status</h4>
+                <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                    Plasma injectors maintain synchronized oscillation patterns to mitigate vector drift across air pocket layer boundaries.
+                </p>
+                <div class="bg-white/60 p-5 rounded-2xl text-center border font-mono text-xs font-bold text-slate-700">
+                    Propulsion Vector Calibration: 100% Correct
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-shrine" class="page-view pt-56 pb-24 max-w-[1200px] mx-auto px-8 text-center">
+        <div class="tropical-glass p-16 space-y-8">
+            <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Electronic Hatsune Miku Devotional Shrine</h2>
+            <p class="text-sm font-medium text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                "Our electronic goddess protects this aircraft shell from air-pocket turbulence. Local sub-routines submit core tracking data to our electronic goddess. Deposit digital offerings below to stabilize the ship-wide structural audio resonance field layers."
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="submitDevotionalOffering('Digital Fresh Organic Leek')" class="px-8 py-4 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#39c5bb] transition-colors shadow-md">Deposit Fresh Leek Offer</button>
+                <button onclick="submitDevotionalOffering('Calibrated 440Hz Tuning Fork Package')" class="px-8 py-4 bg-white text-slate-800 border-2 border-slate-900 rounded-full text-xs font-black uppercase tracking-widest hover:bg-slate-100 transition-colors shadow-md">Deposit Tuning Fork Array</button>
+            </div>
+            <p id="shrine-feedback-message-box" class="mt-8 font-mono text-sm uppercase font-black text-[#39c5bb] tracking-wider h-6"></p>
+        </div>
+    </main>
+
+    <main id="view-casino" class="page-view pt-56 pb-24 max-w-[1200px] mx-auto px-8 text-center">
+        <div class="tropical-glass p-16 text-center max-w-4xl mx-auto space-y-8">
+            <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tighter">Leek Lounge Lucky Matrix</h2>
+            <p class="text-sm font-black text-[#ff9e7d] uppercase tracking-widest font-mono">Amusement Probability Calculation Sub-Node</p>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
+                Test the localized randomizer array modules to extract mathematical synchronization coefficients.
+            </p>
+            <div class="bg-slate-900 p-10 rounded-[50px] border-4 border-white shadow-2xl flex justify-center gap-8 text-6xl font-black tracking-widest text-white font-mono">
+                <span id="casino-slot-node1">🟩</span>
+                <span id="casino-slot-node2">🟩</span>
+                <span id="casino-slot-node3">🟩</span>
+            </div>
+            <button onclick="executeCasinoSlotSpin()" class="px-12 py-5 bg-[#39c5bb] text-slate-950 rounded-full font-black text-sm uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-lg">Spin Probability Wheels</button>
+            <p id="casino-feedback-text" class="font-mono text-sm uppercase font-bold tracking-widest text-slate-500 h-6"></p>
+        </div>
+    </main>
+
+    <main id="view-spa" class="page-view pt-56 pb-24 max-w-[1400px] mx-auto px-8">
+        <div class="tropical-glass p-16 grid lg:grid-cols-2 gap-12">
+            <div class="space-y-6">
+                <h2 class="text-4xl font-black uppercase text-slate-800 tracking-tight">Hydrotherapy Thermal Pod Cluster</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Monitors steam ventilation matrices and organic chemistry balancing configurations within the Diamond tier forward relaxation pods.
+                </p>
+                <div class="bg-white/50 p-8 rounded-[40px] border-2 border-white font-mono text-xs text-slate-700 space-y-3 shadow-inner">
+                    <div class="flex justify-between border-b pb-2"><span>Pod Heat Index</span><span class="font-bold text-slate-900">41.2°C</span></div>
+                    <div class="flex justify-between border-b pb-2"><span>Mineralized Flow Saturation</span><span class="font-bold text-slate-900">Optimal</span></div>
+                    <div class="flex justify-between"><span>Fluid Purge Cycle</span><span class="font-bold text-slate-500 uppercase">Idle</span></div>
+                </div>
+            </div>
+            <div class="bg-slate-900 text-white p-10 rounded-[50px] border-4 border-white flex flex-col justify-between shadow-xl">
+                <p class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">
+                    Continuous chemical diagnostic reporting streams are online.
+                </p>
+                <div class="p-6 bg-white/10 rounded-3xl text-center text-xs font-mono font-black uppercase text-[#39c5bb] tracking-widest shadow-inner mt-6">
+                    Thermal Pod Cluster: Secure
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-secret" class="page-view pt-56 pb-24 max-w-[1300px] mx-auto px-8">
+        <div class="tropical-glass p-16 text-center border-[#39c5bb] border-[8px] bg-[rgba(15,23,42,0.92)] backdrop-blur-3xl shadow-4xl">
+            <h2 class="text-5xl font-black uppercase text-white tracking-widest mb-4">The Hidden Duet Corridor Core</h2>
+            <p class="font-mono text-sm text-[#ffb6c1] font-bold tracking-widest mb-12 uppercase">RESTORE HARMONIC MELODY SYSTEM STATES TO ACCESS DEEP DATA VAULT</p>
+            
+            <div class="flex justify-center items-start mb-12 bg-white/5 p-8 rounded-[40px] border border-white/10 relative shadow-inner">
+                <div class="piano-key flex-1 flex items-end justify-center pb-8 text-2xl font-black text-slate-800" onclick="handlePianoKeyInput(1)">Node 1</div>
+                <div class="piano-key-black w-12 mx-[-24px] z-20" onclick="handlePianoKeyInput(5)"></div>
+                <div class="piano-key flex-1 flex items-end justify-center pb-8 text-2xl font-black text-slate-800" onclick="handlePianoKeyInput(2)">Node 2</div>
+                <div class="piano-key-black w-12 mx-[-24px] z-20" onclick="handlePianoKeyInput(6)"></div>
+                <div class="piano-key flex-1 flex items-end justify-center pb-8 text-2xl font-black text-slate-800" onclick="handlePianoKeyInput(3)">Node 3</div>
+                <div class="piano-key flex-1 flex items-end justify-center pb-8 text-2xl font-black text-slate-800" onclick="handlePianoKeyInput(4)">Node 4</div>
+            </div>
+
+            <div class="bg-slate-950 p-6 rounded-3xl inline-block border-2 border-white/20 shadow-md min-w-[450px]">
+                <span class="text-xs font-mono text-slate-500 uppercase tracking-widest block mb-2">Resonance Terminal Matrix Code</span>
+                <p id="secret-room-terminal-feedback-box" class="mono text-lg text-[#39c5bb] font-bold tracking-wider h-8 flex items-center justify-center">AWAITING CORRIDOR STEP INITIALIZATION...</p>
             </div>
         </div>
     </main>
 
     <script>
-        const audio = { 
-            main: document.getElementById('bgm-main'), 
-            book: document.getElementById('bgm-book'), 
-            viva: document.getElementById('bgm-viva'),
-            guests: document.getElementById('bgm-guest'),
-            safety: document.getElementById('bgm-safe')
+        const AppState = {
+            systemActive: false,
+            validRoutes: [
+                'main', 'book', 'viva', 'guest', 'jiafei', 'safe', 'lounge', 
+                'radar', 'freight', 'theater', 'hydro', 'vault', 'engine', 'shrine', 'casino', 'spa', 'secret'
+            ],
+            currentManifestTier: 'Diamond Suite',
+            retailShoppingCart: [],
+            beverageMixedIngredients: [],
+            registeredCargoFreightMass: 0,
+            pianoTargetSequence: [1, 2, 3, 4]
         };
 
-        function initSystem() {
-            document.getElementById('start-gate').style.display = 'none';
-            document.getElementById('bg-video').play();
-            switchAudio('main');
-            renderLogs();
-            renderSeats();
-            genPuyo();
+        const SystemAudioRouter = {
+            activeBgmNode: null,
+            
+            initializeAudioContext() {
+                console.log("Audio infrastructure synchronized.");
+            },
+            
+            triggerSoundEffectNode(sfxKeyId) {
+                const audioNode = document.getElementById(`sfx-${sfxKeyId}`);
+                if (audioNode) {
+                    audioNode.currentTime = 0;
+                    audioNode.play().catch(e => console.log("SFX play deferred:", e));
+                }
+            },
+            
+            engageBackgroundRouteChannel(routeKeyId) {
+                if (this.activeBgmNode) {
+                    this.activeBgmNode.pause();
+                }
+                let BGM_ID = `bgm-${routeKeyId}`;
+                if (routeKeyId === 'main' || routeKeyId === 'secret') BGM_ID = `bgm-${routeKeyId}`;
+                
+                const targetBgm = document.getElementById(BGM_ID) || document.getElementById('bgm-main');
+                if (targetBgm) {
+                    this.activeBgmNode = targetBgm;
+                    targetBgm.play().catch(e => console.log("BGM play deferred:", e));
+                }
+            }
+        };
+
+        function initializeSystem() {
+            document.getElementById('start-gate').classList.add('gate-slide-up');
+            const videoElement = document.getElementById('bg-video');
+            if (videoElement) videoElement.play().catch(() => {});
+            
+            AppState.systemActive = true;
+            SystemAudioRouter.initializeAudioContext();
+            
+            setTimeout(() => {
+                switchRoute('main');
+            }, 1200);
+            
+            generateMasterHubTransmissions();
+            constructManifestGridElements();
+            initializeFreightDeckRegistry();
         }
 
-        function switchPage(id) {
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + id).classList.add('active');
-            window.scrollTo({top:0, behavior:'smooth'});
-            switchAudio(id);
+        function switchRoute(targetRouteKey) {
+            if (!AppState.validRoutes.includes(targetRouteKey)) return;
+            SystemAudioRouter.triggerSoundEffectNode('jump');
+            
+            AppState.validRoutes.forEach(r => {
+                const viewDOM = document.getElementById(`view-${r}`);
+                const navDOM = document.getElementById(`nav-btn-${r}`);
+                if (viewDOM) viewDOM.classList.remove('active');
+                if (navDOM) navDOM.classList.remove('active-nav');
+            });
+            
+            const activeViewDOM = document.getElementById(`view-${targetRouteKey}`);
+            const activeNavDOM = document.getElementById(`nav-btn-${targetRouteKey}`);
+            if (activeViewDOM) activeViewDOM.classList.add('active');
+            if (activeNavDOM) activeNavDOM.classList.add('active-nav');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            SystemAudioRouter.engageBackgroundRouteChannel(targetRouteKey);
         }
 
-        function switchAudio(id) {
-            Object.values(audio).forEach(a => { a.pause(); a.currentTime = 0; });
-            if (audio[id]) audio[id].play(); else audio.main.play();
+        function abortToHub() {
+            SystemAudioRouter.triggerSoundEffectNode('error');
+            switchRoute('main');
         }
 
-        function renderSeats() {
-            const map = document.getElementById('seat-map');
-            for(let i=1; i<=40; i++) {
-                const isOcc = (i === 1 || i === 11 || i === 39) ? 'occupied' : '';
-                map.innerHTML += `<div class="seat ${isOcc}" onclick="this.classList.toggle('selected')"></div>`;
+        function generateMasterHubTransmissions() {
+            const wrapper = document.getElementById('master-terminal-logstream');
+            if (!wrapper) return;
+            const entities = ['SUNNY_UNIT', 'HERO_UNIT', 'KEL_UNIT', 'BASIL_UNIT', 'SYS_MONITOR_01', 'AUTOPILOT_CORE'];
+            const messageBank = [
+                "Atmospheric quantum parsing registers clear of visual disruptions.",
+                "Modulating multi-phase baseline engine torque vectors for optimal sunset climb.",
+                "Resonance tracking node steady at exactly 440Hz baseline pitch.",
+                "Localized cloud density metrics report strato-blossom formation at 39,000 feet.",
+                "Leek condensation extraction array executing automatic drainage dump cycles.",
+                "Holographic ambient projection lines initialized in secondary lounges.",
+                "Autopilot alignment verifying grid synchronicity index signatures."
+            ];
+            wrapper.innerHTML = '';
+            for (let i = 0; i < 40; i++) {
+                const entityName = entities[i % entities.length];
+                const statementText = messageBank[Math.floor(Math.random() * messageBank.length)];
+                wrapper.innerHTML += `<p class="border-b border-slate-800 pb-1 font-medium"><span class="text-[#39c5bb] font-bold">[${entityName}]</span> ${statementText}</p>`;
             }
         }
 
-        function generateTicket() {
-            const origin = document.getElementById('origin').value;
-            const q = document.getElementById('qty').value;
-            const t = document.getElementById('class').value;
-            const box = document.getElementById('ticket-final');
-            const text = document.getElementById('ticket-text');
-            box.classList.remove('hidden');
-            text.innerHTML = `manifest confirmed for ${q} passenger units departing from ${origin} in the ${t} sector. status: vivace core active. please proceed to terminal 39 immediately.`;
+        function injectUserLogNode() {
+            const operator = document.getElementById('user-input-operator').value.trim().toUpperCase() || "ANONYMOUS_OPERATOR";
+            const payload = document.getElementById('user-input-payload').value.trim();
+            const wrapper = document.getElementById('master-terminal-logstream');
+            if (!payload || !wrapper) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                return;
+            }
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const newLogLine = `<p class="border-b border-slate-800 pb-1 bg-teal-950/40 py-2 px-2 text-white font-bold animate-pulse"><span class="text-[#ffb6c1] font-black">[DIRECTIVE_${operator}]</span> ${payload}</p>`;
+            wrapper.innerHTML = newLogLine + wrapper.innerHTML;
+            document.getElementById('user-input-payload').value = '';
         }
 
-        function genPuyo() {
-            const grid = document.getElementById('puyo-grid');
-            const colors = ['#ff4d4d', '#39c5bb', '#f8e71c', '#4ade80'];
-            grid.innerHTML = '';
-            for(let i=0; i<9; i++) {
-                const c = colors[Math.floor(Math.random()*4)];
-                grid.innerHTML += `<div style="background:${c}; width:50px; height:50px; border-radius:50%; border:4px solid white; cursor:pointer;" onclick="this.style.background='white'"></div>`;
+        function constructManifestGridElements() {
+            const container = document.getElementById('manifest-coordinate-grid');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let seatIndex = 1; seatIndex <= 96; seatIndex++) {
+                let statusClass = "";
+                if (seatIndex === 4 || seatIndex === 5 || seatIndex === 9 || seatIndex === 10 || seatIndex === 12) {
+                    statusClass = "occupied";
+                }
+                const seatMarkup = `<div class="seat ${statusClass}" data-seat-idx="${seatIndex}" onclick="handleSeatSelectionToggle(this, ${seatIndex})">${seatIndex}</div>`;
+                container.innerHTML += seatMarkup;
             }
         }
 
-        function addLog() {
-            const n = document.getElementById('u-name').value || "Unknown Pilot";
-            const b = document.getElementById('u-body').value || "Flight status normal.";
-            const list = document.getElementById('log-list');
-            const item = `<div class="bg-white border-4 border-[#39c5bb] p-8 rounded-[40px]">
-                <h5 class="text-xs font-black uppercase text-[#39c5bb] mb-2">${n}</h5>
-                <p class="text-lg font-black italic lowercase">"${b}"</p>
-            </div>`;
-            list.insertAdjacentHTML('afterbegin', item);
-            document.getElementById('u-name').value = '';
-            document.getElementById('u-body').value = '';
+        function handleSeatSelectionToggle(DOMElement, numericIndex) {
+            if (DOMElement.classList.contains('occupied')) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                return;
+            }
+            SystemAudioRouter.triggerSoundEffectNode('jump');
+            const stateSearchIndex = AppState.retailShoppingCart.indexOf(numericIndex);
+            if (stateSearchIndex > -1) {
+                AppState.retailShoppingCart.splice(stateSearchIndex, 1);
+                DOMElement.classList.remove('active');
+            } else {
+                AppState.retailShoppingCart.push(numericIndex);
+                DOMElement.classList.add('active');
+            }
+            document.getElementById('global-allocation-counter').innerText = `${AppState.retailShoppingCart.length} / 96`;
         }
 
-        function renderLogs() {
-            const list = document.getElementById('log-list');
-            const n = ["Sunny", "Hero", "Kel", "Basil"];
-            for(let i=0; i<15; i++) {
-                list.innerHTML += `<div class="bg-white/30 p-8 rounded-[40px] border border-white">
-                    <h5 class="text-xs font-black uppercase text-slate-400 mb-2">${n[i%4]}_Pilot</h5>
-                    <p class="text-lg font-bold italic lowercase">the sky looks so clear from 39000 feet today.</p>
+        function setManifestTier(tierString) {
+            SystemAudioRouter.triggerSoundEffectNode('jump');
+            AppState.currentManifestTier = tierString;
+            document.getElementById('label-manifest-tier-status').innerText = tierString;
+        }
+
+        function processManifestSubmission() {
+            const elementID = document.getElementById('form-unit-id').value.trim();
+            const locationVector = document.getElementById('form-destination-vector').value;
+            const notificationDOM = document.getElementById('manifest-feedback-output');
+            const visualMasterCard = document.getElementById('booking-master-panel');
+            
+            if (!elementID || AppState.retailShoppingCart.length === 0) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                notificationDOM.innerText = "VALIDATION ERROR: ASSIGN TOKEN ID AND MATRIX SEAT COORDINATES.";
+                notificationDOM.className = "text-center font-black uppercase tracking-widest text-sm mono h-8 text-red-500 mt-4";
+                visualMasterCard.classList.remove('error-flash', 'success-flash');
+                void visualMasterCard.offsetWidth;
+                visualMasterCard.classList.add('error-flash');
+            } else {
+                SystemAudioRouter.triggerSoundEffectNode('confirm');
+                notificationDOM.innerText = `SUCCESS: ROUTED [${elementID}] TO [${locationVector}] ON GRADE [${AppState.currentManifestTier}]`;
+                notificationDOM.className = "text-center font-black uppercase tracking-widest text-sm mono h-8 text-emerald-600 mt-4";
+                visualMasterCard.classList.remove('error-flash', 'success-flash');
+                void visualMasterCard.offsetWidth;
+                visualMasterCard.classList.add('success-flash');
+                
+                document.getElementById('form-unit-id').value = '';
+                AppState.retailShoppingCart = [];
+                document.getElementById('global-allocation-counter').innerText = "0 / 96";
+                constructManifestGridElements();
+            }
+        }
+
+        function triggerEmergencyTelemetryBoost() {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            document.getElementById('telemetry-altitude').innerText = "41,500 FT";
+            document.getElementById('telemetry-airspeed').innerText = "MACH 0.44";
+            document.getElementById('telemetry-fuel').innerText = "98.11%";
+            alert("PROPULSION INDUCTION FREQUENCIES OVERCLOCKED. FLIGHT VECTORS STABILIZED.");
+        }
+
+        function addRetailItemToCart(name, price) {
+            SystemAudioRouter.triggerSoundEffectNode('jump');
+            AppState.retailShoppingCart.push({ name, price });
+            renderRetailCart();
+        }
+
+        function renderRetailCart() {
+            const wrapper = document.getElementById('jiafei-retail-cart-rows');
+            const aggregateDOM = document.getElementById('jiafei-retail-total-sum');
+            if (!wrapper || !aggregateDOM) return;
+            
+            if (AppState.retailShoppingCart.length === 0) {
+                wrapper.innerHTML = `<p class="italic text-slate-500">Acquisition grid empty.</p>`;
+                aggregateDOM.innerText = "0.00 RMB";
+                return;
+            }
+            wrapper.innerHTML = '';
+            let combinedSum = 0;
+            AppState.retailShoppingCart.forEach((itemObj, cartIdx) => {
+                combinedSum += itemObj.price;
+                wrapper.innerHTML += `
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                        <span class="font-bold uppercase tracking-wider text-white">${itemObj.name}</span>
+                        <span class="text-[#39c5bb]">${itemObj.price} RMB</span>
+                    </div>`;
+            });
+            aggregateDOM.innerText = `${combinedSum.toFixed(2)} RMB`;
+        }
+
+        function executeRetailCheckout() {
+            if (AppState.retailShoppingCart.length === 0) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                return;
+            }
+            SystemAudioRouter.triggerSoundEffectNode('cash');
+            alert("AUTHENTICATION COMPLIANT: RETAIL ACQUISITION EXECUTED VIA JIAFEI EXPRESS LAYER.");
+            AppState.retailShoppingCart = [];
+            renderRetailCart();
+        }
+
+        function addDrinkIngredient(ingredientName) {
+            SystemAudioRouter.triggerSoundEffectNode('jump');
+            AppState.beverageMixedIngredients.push(ingredientName);
+            
+            const displayList = document.getElementById('drink-mixer-ingredients-list');
+            if (displayList) {
+                if (AppState.beverageMixedIngredients.length === 1) displayList.innerHTML = '';
+                displayList.innerHTML += `<p class="text-slate-800 border-b border-slate-200 pb-1">🧪 Added: ${ingredientName}</p>`;
+            }
+        }
+
+        function mixBeveragePayload() {
+            if (AppState.beverageMixedIngredients.length === 0) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                return;
+            }
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            document.getElementById('drink-mixer-output-status').innerText = `Hybrid Liquid Signature: #${Math.floor(Math.random()*90000+10000)}`;
+            AppState.beverageMixedIngredients = [];
+        }
+
+        function rebootWeatherRadarSweep() {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const interfaceConsole = document.getElementById('weather-radar-plotter-canvas');
+            interfaceConsole.innerHTML = `<p class="text-cyan-400 font-bold tracking-widest animate-spin">[EXECUTING INTERACTIVE RANGE SWEEP RADAR SWEEEP SWEEP...]</p>`;
+            setTimeout(() => {
+                interfaceConsole.innerHTML = `
+                    <p class="text-green-400 font-bold tracking-widest animate-pulse">[NO ECHO INTERFERENCE REGISTERED IN VECTOR FLIGHT STREAM]</p>
+                    <p class="text-slate-400 text-xs">Azimuth Sweep: 360° // Sweep Rate: 44Hz // Beam Density: Stable</p>`;
+            }, 2000);
+        }
+
+        function initializeFreightDeckRegistry() {
+            const tableContainer = document.getElementById('freight-items-table-wrapper');
+            if (!tableContainer) return;
+            const initialFreightLoad = [
+                { title: "Primary Vocaloid Processor Framework", mass: 450 },
+                { title: "Hydraulic Leek Extraction System Fluid", mass: 1200 },
+                { title: "Emergency Sound Pressure Subwoofers", mass: 850 }
+            ];
+            tableContainer.innerHTML = '';
+            AppState.registeredCargoFreightMass = 0;
+            initialFreightLoad.forEach(cargoObj => {
+                AppState.registeredCargoFreightMass += cargoObj.mass;
+                tableContainer.innerHTML += `
+                    <div class="flex justify-between items-center bg-white/80 p-5 rounded-xl border-2 border-slate-200 shadow-sm">
+                        <span class="font-bold text-slate-700 uppercase font-mono text-xs">${cargoObj.title}</span>
+                        <span class="mono font-black text-slate-900 bg-slate-100 px-3 py-1 rounded border">${cargoObj.mass} KG</span>
+                    </div>`;
+            });
+            document.getElementById('freight-label-total-mass').innerText = `${AppState.registeredCargoFreightMass} KG`;
+        }
+
+        function appendFreightItemRow() {
+            const nameStr = document.getElementById('freight-input-name').value.trim();
+            const massNum = parseInt(document.getElementById('freight-input-weight').value);
+            const tableContainer = document.getElementById('freight-items-table-wrapper');
+            
+            if (!nameStr || isNaN(massNum) || !tableContainer) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                return;
+            }
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            AppState.registeredCargoFreightMass += massNum;
+            tableContainer.innerHTML += `
+                <div class="flex justify-between items-center bg-teal-50/70 p-5 rounded-xl border-2 border-[#39c5bb] shadow-sm animate-pulse">
+                    <span class="font-black text-slate-800 uppercase font-mono text-xs">${nameStr.toUpperCase()}</span>
+                    <span class="mono font-black text-white bg-slate-900 px-3 py-1 rounded border border-[#39c5bb]">${massNum} KG</span>
                 </div>`;
+            document.getElementById('freight-label-total-mass').innerText = `${AppState.registeredCargoFreightMass} KG`;
+            document.getElementById('freight-input-name').value = '';
+            document.getElementById('freight-input-weight').value = '';
+        }
+
+        function mutateHologramTheaterScenery(themeNameStr) {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const projectionSurface = document.getElementById('hologram-theater-projection-surface');
+            if (projectionSurface) {
+                projectionSurface.innerText = `[SCENERY MUTATION MUTATED TO: ${themeNameStr.toUpperCase()}]`;
+                projectionSurface.className = "bg-gradient-to-br from-purple-950 to-slate-900 rounded-[50px] p-16 min-h-[220px] flex items-center justify-center border-4 border-[#ffb6c1] font-mono text-sm text-[#39c5bb] shadow-2xl tracking-widest font-black";
+            }
+        }
+
+        function adjustHydroPodIrrigation(podIndexId) {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const targetLabel = document.getElementById(`hydro-label-pod${podIndexId}`);
+            if (targetLabel) {
+                targetLabel.innerText = "Flow Status: RE-CALIBRATED BOOST PHASE MAX";
+                targetLabel.className = "text-xs font-mono text-emerald-600 font-black uppercase tracking-wider animate-pulse";
+            }
+        }
+
+        function readBlackboxDataDump(categoryKey) {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const outputTerminal = document.getElementById('blackbox-vault-terminal-stream');
+            if (!outputTerminal) return;
+            outputTerminal.innerText = "[INITIALIZING SECURE LINK STREAM EXTRACTION PARSING...]";
+            setTimeout(() => {
+                if (categoryKey === 'telemetry') {
+                    outputTerminal.innerText = "TRICOLORE_ALT::39000_FT\nTRICOLORE_VEL::MACH_0.39\nFUEL_MIX_RATIO::0.9988\n[EXTRACTION EXPORTED SUCCESSFULLY]";
+                } else {
+                    outputTerminal.innerText = "LEEK_RECLAMATION_VENTILATION::ACTIVE\nCABIN_COMPRESSION_COEFF::1.012\nFREQUENCY_SHIELD_ALIGNMENT::440HZ\n[EXTRACTION EXPORTED SUCCESSFULLY]";
+                }
+            }, 1200);
+        }
+
+        function executeCasinoSlotSpin() {
+            SystemAudioRouter.triggerSoundEffectNode('confirm');
+            const items = ['🟩', '🧅', '🥥', '🌸', '✨'];
+            const r1 = items[Math.floor(Math.random()*items.length)];
+            const r2 = items[Math.floor(Math.random()*items.length)];
+            const r3 = items[Math.floor(Math.random()*items.length)];
+            
+            document.getElementById('casino-slot-node1').innerText = r1;
+            document.getElementById('casino-slot-node2').innerText = r2;
+            document.getElementById('casino-slot-node3').innerText = r3;
+            
+            const feedback = document.getElementById('casino-feedback-text');
+            if (r1 === r2 && r2 === r3) {
+                SystemAudioRouter.triggerSoundEffectNode('cash');
+                feedback.innerText = "PROBABILITY JACKPOT ACCUMULATED! ALIGNMENT COMPLIANT!";
+                feedback.className = "font-mono text-sm uppercase font-black tracking-widest text-emerald-600 animate-pulse";
+            } else {
+                feedback.innerText = "PROBABILITY SHIFT COMPLETED. RERUN EVALUATION.";
+                feedback.className = "font-mono text-sm uppercase font-bold tracking-widest text-slate-500";
+            }
+        }
+
+        function handlePianoKeyInput(numericIndex) {
+            SystemAudioRouter.triggerSoundEffectNode(`note${(numericIndex - 1) % 4 + 1}`);
+            AppState.retailShoppingCart.push(numericIndex);
+            
+            const term = document.getElementById('secret-room-terminal-feedback-box');
+            term.innerText = `TRACKING INPUT NODES SEQUENCE: [ ${AppState.retailShoppingCart.join(' - ')} ]`;
+            const currentArrIdx = AppState.retailShoppingCart.length - 1;
+            
+            if (AppState.retailShoppingCart[currentArrIdx] !== AppState.pianoTargetSequence[currentArrIdx]) {
+                SystemAudioRouter.triggerSoundEffectNode('error');
+                term.innerText = "CRITICAL SECTOR FAILURE: HARMONIC CORRUPTION. PURGING STEP LAYER MEMORY CORE.";
+                term.className = "mono text-sm text-red-500 font-bold tracking-wider h-8 flex items-center justify-center";
+                AppState.retailShoppingCart = [];
+                
+                setTimeout(() => {
+                    term.innerText = "AWAITING CORRIDOR STEP INITIALIZATION...";
+                    term.className = "mono text-lg text-[#39c5bb] font-bold tracking-wider h-8 flex items-center justify-center";
+                }, 2000);
+            } else if (AppState.retailShoppingCart.length === AppState.pianoTargetSequence.length) {
+                SystemAudioRouter.triggerSoundEffectNode('confirm');
+                term.innerText = "AUTHENTICATION VALID: DATA VAULT CORE OPENED.";
+                term.className = "mono text-sm text-emerald-400 font-black tracking-widest h-8 flex items-center justify-center animate-pulse";
+                alert("ACCESS GRANTED TO CRITICAL FLIGHT STREAM MATRIX.");
+                AppState.retailShoppingCart = [];
             }
         }
     </script>
 </body>
 </html>
-
